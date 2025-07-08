@@ -1,0 +1,16 @@
+.range-slider {
+  max-width: 300px;
+  margin: 20px auto;
+  font-family: sans-serif;
+}
+
+.range-slider__label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.range-slider__input {
+  width: 100%;
+  cursor: pointer;
+}

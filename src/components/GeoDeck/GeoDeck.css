@@ -1,0 +1,235 @@
+.GeoDeck_container {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100%;
+}
+
+.game-wrapper {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  gap: 24px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.side-panel {
+  background: #f9f9f9;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  font-family: "Segoe UI", sans-serif;
+  font-size: 14px;
+  color: #222;
+}
+
+.side-panel h2 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: #111;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 4px;
+}
+
+.side-panel ul {
+  list-style: disc;
+  padding-left: 20px;
+  margin: 0;
+}
+
+.side-panel li {
+  margin-bottom: 8px;
+}
+
+/* Main game area */
+.main-game {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 80px;
+  padding-bottom: 20px;
+  max-height: calc(100vh - 68px);
+  overflow-y: auto;
+}
+
+.dice-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.dice-container button {
+  padding: 10px 16px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  background-color: #111;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.dice-container button:hover {
+  background-color: #333;
+}
+
+.dice-container button.active {
+  background-color: #555;
+}
+
+/* Board grid */
+.GeoDeck_board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  width: fit-content;
+  margin: 32px auto;
+  background-color: #fff;
+  padding: 16px;
+}
+
+.tile {
+  width: 160px;
+  height: 200px;
+  position: relative;
+  border: 1px solid #444;
+  display: flex;
+  flex-direction: column;
+  font-family: "Segoe UI", sans-serif;
+  background-color: #fdfdfd;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.flag-container {
+  width: 100%;
+  height: 80px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+  border-bottom: 1px solid #444;
+}
+
+.flag-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.tile-content {
+  padding: 12px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.country-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111;
+  margin: 0;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.country-info {
+  font-size: 12px;
+  color: #555;
+  margin: 0;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Loading and error states */
+.loading,
+.error {
+  text-align: center;
+  font-size: 1.5rem;
+  font-family: "Segoe UI", sans-serif;
+  color: #555;
+  padding: 60px 20px;
+}
+
+.error {
+  color: #d32f2f;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .game-wrapper {
+    flex-direction: column;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .side-panel {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .main-game {
+    width: 100%;
+  }
+
+  .board {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+
+  .board {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+  }
+
+  .tile {
+    width: 140px;
+    height: 180px;
+  }
+
+  .flag-container {
+    height: 70px;
+  }
+
+  .GeoDeck_title {
+    font-size: 28px;
+    margin-block: 0px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .board {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(16, 1fr);
+  }
+
+  .tile {
+    width: 200px;
+    height: 160px;
+  }
+
+  .flag-container {
+    height: 60px;
+  }
+}

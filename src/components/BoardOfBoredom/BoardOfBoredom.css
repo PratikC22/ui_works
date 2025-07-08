@@ -1,0 +1,193 @@
+.board__container {
+  display: flex;
+  flex-direction: row;
+  height: calc(100vh - 68px);
+  width: 100vw;
+}
+
+.board__sidebar {
+  width: 400px;
+  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.board__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: 24px;
+  align-items: center;
+  min-width: 0;
+}
+
+.board__panel {
+  background: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  color: #333;
+  font-size: 14px;
+}
+
+.board__panel-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #ddd;
+}
+
+.board__panel-list {
+  padding-left: 16px;
+  margin: 0;
+}
+
+.board__panel-item {
+  margin-bottom: 6px;
+}
+
+.board__title {
+  font-size: 24px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.board__dice {
+  margin-bottom: 20px;
+}
+
+.board__dice-button {
+  padding: 10px 24px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  background-color: #111;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.board__dice-button:hover {
+  background-color: #333;
+}
+
+/* Game board */
+.board__grid {
+  display: flex;
+  flex-direction: column;
+  border: 3px solid #000;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  background: #fff;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.board__row {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.board__tile {
+  width: 60px;
+  height: 60px;
+  border: 1px solid #444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  position: relative;
+  background: #fdfdfd;
+}
+
+.board__tile--red {
+  background-color: #f5d0c5;
+}
+
+.board__row:nth-child(even) .board__tile {
+  background-color: #d1e7dd;
+}
+
+.board__row:nth-child(even) .board__tile--red {
+  background-color: #cfe2f3;
+}
+
+.board__tile-number {
+  position: absolute;
+  top: 4px;
+  left: 6px;
+  font-size: 12px;
+  color: #555;
+}
+
+.board__dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: #000;
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  border: 2px solid white;
+}
+
+/* Color key */
+.board__color {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 6px;
+  border-radius: 2px;
+  border: 1px solid #999;
+  vertical-align: middle;
+}
+
+.board__color--444 {
+  background-color: #444;
+}
+
+.board__color--d1e7dd {
+  background-color: #d1e7dd;
+}
+
+.board__color--cfe2f3 {
+  background-color: #cfe2f3;
+}
+
+.board__color--fdfdfd {
+  background-color: #fdfdfd;
+}
+
+.board__color--f5d0c5 {
+  background-color: #f5d0c5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .board__container {
+    flex-direction: column;
+  }
+
+  .board__sidebar {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .board__main {
+    margin: 0;
+  }
+
+  .board__panel {
+    flex: 1 1 300px;
+  }
+}

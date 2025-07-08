@@ -8,12 +8,12 @@ import { useSEO } from '../../utils/useSEO'
 const WebSocketWrapper = () => {
   useSEO('/websocket')
   return (
-    <div className='ws-wrapper'>
+    <div className='websocket-wrapper__container'>
       <Sidebar>
         <BackButton />
-        <div className='ws-panel'>
-          <h2 className='ws-panel-title'>Rules</h2>
-          <ul className='ws-panel-list'>
+        <div className='websocket-wrapper__panel'>
+          <h2 className='websocket-wrapper__panel-title'>Rules</h2>
+          <ul className='websocket-wrapper__panel-list'>
             <li>Connect to a given WebSocket URL</li>
             <li>Manual connect/disconnect functionality</li>
             <li>Auto reconnect with exponential backoff</li>
@@ -22,9 +22,9 @@ const WebSocketWrapper = () => {
             <li>Use a separate CSS file for styling</li>
           </ul>
         </div>
-        <div className='ws-panel'>
-          <h2 className='ws-panel-title'>Hints</h2>
-          <ul className='ws-panel-list'>
+        <div className='websocket-wrapper__panel'>
+          <h2 className='websocket-wrapper__panel-title'>Hints</h2>
+          <ul className='websocket-wrapper__panel-list'>
             <li>
               Use <code>useRef</code> for the WebSocket instance
             </li>
@@ -39,7 +39,7 @@ const WebSocketWrapper = () => {
         </div>
       </Sidebar>
 
-      <div className='ws-main'>
+      <div className='websocket-wrapper__main'>
         <WebSocketComponent />
       </div>
     </div>

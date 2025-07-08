@@ -9,7 +9,6 @@
   cursor: pointer;
   transition: background 0.2s ease-in-out;
   width: fit-content;
-  margin-bottom: 16px;
 }
 
 .back-button:hover {

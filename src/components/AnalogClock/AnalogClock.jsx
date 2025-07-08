@@ -26,7 +26,7 @@ const AnalogClock = () => {
   const secondAngle = seconds * 6
 
   return (
-    <section className='clock-wrapper'>
+    <section className='analog-clock__wrapper'>
       <Sidebar>
         <BackButton />
         <div className='AnalogClock__side-panel rules'>
@@ -44,29 +44,29 @@ const AnalogClock = () => {
           <ul>
             <li>Clock diameter: 300px</li>
             <li>
-              Border: <span className='color-box color-333' /> #333 (4px)
+              Border: <span className='analog-clock__color-box analog-clock__color--333' /> #333 (4px)
             </li>
             <li>
-              Background: <span className='color-box color-fff' /> #fff
+              Background: <span className='analog-clock__color-box analog-clock__color--fff' /> #fff
             </li>
             <li>
-              Hour hand: <span className='color-box color-000' /> #000 (6px
+              Hour hand: <span className='analog-clock__color-box analog-clock__color--000' /> #000 (6px
               wide, 80px long)
             </li>
             <li>
-              Minute hand: <span className='color-box color-000' /> #000 (4px
+              Minute hand: <span className='analog-clock__color-box analog-clock__color--000' /> #000 (4px
               wide, 110px long)
             </li>
             <li>
-              Second hand: <span className='color-box color-e74c3c' /> #e74c3c
+              Second hand: <span className='analog-clock__color-box analog-clock__color--e74c3c' /> #e74c3c
               (2px wide, 120px long)
             </li>
           </ul>
         </div>
       </Sidebar>
-      <div className='main-clock'>
-        <h1 className='clock-header'>Analog Clock</h1>
-        <div className='clock'>
+      <div className='analog-clock__main'>
+        <h1 className='analog-clock__header'>Analog Clock</h1>
+        <div className='analog-clock__face'>
           {/* Hour numbers */}
           {[...Array(12)].map((_, i) => {
             const number = i === 0 ? 12 : i
@@ -74,7 +74,7 @@ const AnalogClock = () => {
             return (
               <div
                 key={i}
-                className='hour-number'
+                className='analog-clock__hour-number'
                 style={{
                   transform: `rotate(${angle}deg) translate(0, -130px) rotate(-${angle}deg)`,
                 }}
@@ -86,25 +86,25 @@ const AnalogClock = () => {
 
           {/* Clock hands */}
           <div
-            className='hand hour-hand'
+            className='analog-clock__hand analog-clock__hand--hour'
             style={{
               transform: `rotate(${hourAngle}deg)`,
             }}
           />
           <div
-            className='hand minute-hand'
+            className='analog-clock__hand analog-clock__hand--minute'
             style={{
               transform: `rotate(${minuteAngle}deg)`,
             }}
           />
           <div
-            className='hand second-hand'
+            className='analog-clock__hand analog-clock__hand--second'
             style={{
               transform: `rotate(${secondAngle}deg)`,
             }}
           />
 
-          <div className='center-dot' />
+          <div className='analog-clock__center-dot' />
         </div>
       </div>
     </section>

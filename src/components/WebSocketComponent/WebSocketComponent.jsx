@@ -200,21 +200,21 @@ const WebSocketComponent = () => {
   };
 
   return (
-    <div className="websocket-container">
-      <div className="header">
-        <h1 className="title">WebSocket Integration</h1>
+    <div className="websocket__container">
+      <div className="websocket__header">
+        <h1 className="websocket__title">WebSocket Integration</h1>
       </div>
 
-      <div className="connection-section">
-        <div className="connection-header">
-          <div className="url-input-group">
-            <label htmlFor="wsUrl" className="url-label">
+      <div className="websocket__connection-section">
+        <div className="websocket__connection-header">
+          <div className="websocket__url-input-group">
+            <label htmlFor="wsUrl" className="websocket__url-label">
               WebSocket URL:
             </label>
             <input
               id="wsUrl"
               type="text"
-              className="url-input"
+              className="websocket__url-input"
               value={wsUrl}
               onChange={(e) => setWsUrl(e.target.value)}
               disabled={
@@ -226,26 +226,26 @@ const WebSocketComponent = () => {
           </div>
         </div>
 
-        <div className="status-section">
-          <div className="status-header">
-            <div className="status-indicator">
+        <div className="websocket__status-section">
+          <div className="websocket__status-header">
+            <div className="websocket__status-indicator">
               <div
-                className={`status-dot ${getStatusClass(connectionStatus)}`}
+                className={`websocket__status-dot ${getStatusClass(connectionStatus)}`}
               />
               <span
-                className={`status-text ${getStatusClass(connectionStatus)}`}
+                className={`websocket__status-text ${getStatusClass(connectionStatus)}`}
               >
                 {connectionStatus.charAt(0).toUpperCase() +
                   connectionStatus.slice(1)}
               </span>
             </div>
 
-            <div className="controls">
+            <div className="websocket__controls">
               <button
-                className={`btn ${
+                className={`websocket__button ${
                   connectionStatus === "connected"
-                    ? "btn-danger"
-                    : "btn-success"
+                    ? "websocket__button--danger"
+                    : "websocket__button--success"
                 }`}
                 onClick={
                   connectionStatus === "connected" ? disconnect : connect
@@ -256,7 +256,7 @@ const WebSocketComponent = () => {
               </button>
 
               <button
-                className="btn btn-primary"
+                className="websocket__button websocket__button--primary"
                 onClick={sendMessage}
                 disabled={connectionStatus !== "connected"}
               >
@@ -264,7 +264,7 @@ const WebSocketComponent = () => {
               </button>
 
               <button
-                className="btn btn-secondary"
+                className="websocket__button websocket__button--secondary"
                 onClick={clearNotifications}
               >
                 Clear All
@@ -272,28 +272,28 @@ const WebSocketComponent = () => {
             </div>
           </div>
 
-          <div className="info-grid">
-            <div className="info-card">
-              <div className="info-label">Status</div>
-              <div className="info-value">{connectionStatus}</div>
+          <div className="websocket__info-grid">
+            <div className="websocket__info-card">
+              <div className="websocket__info-label">Status</div>
+              <div className="websocket__info-value">{connectionStatus}</div>
             </div>
-            <div className="info-card">
-              <div className="info-label">Retry Attempts</div>
-              <div className="info-value">
+            <div className="websocket__info-card">
+              <div className="websocket__info-label">Retry Attempts</div>
+              <div className="websocket__info-value">
                 {retryCount}/{maxReconnectAttempts}
               </div>
             </div>
-            <div className="info-card">
-              <div className="info-label">Notifications</div>
-              <div className="info-value">{notifications.length}</div>
+            <div className="websocket__info-card">
+              <div className="websocket__info-label">Notifications</div>
+              <div className="websocket__info-value">{notifications.length}</div>
             </div>
-            <div className="info-card">
-              <div className="info-label">Auto Reconnect</div>
-              <div className="info-value">
-                <label className="checkbox-label">
+            <div className="websocket__info-card">
+              <div className="websocket__info-label">Auto Reconnect</div>
+              <div className="websocket__info-value">
+                <label className="websocket__checkbox-label">
                   <input
                     type="checkbox"
-                    className="checkbox"
+                  className="websocket__checkbox"
                     checked={autoReconnect}
                     onChange={(e) => setAutoReconnect(e.target.checked)}
                   />
@@ -303,21 +303,21 @@ const WebSocketComponent = () => {
             </div>
           </div>
 
-          {lastError && <div className="error-message">Error: {lastError}</div>}
+          {lastError && <div className="websocket__error-message">Error: {lastError}</div>}
         </div>
       </div>
 
-      <div className="notifications-section">
-        <div className="notifications-header">
-          <h3 className="notifications-title">Real-time Notifications</h3>
-          <span className="notifications-count">
+      <div className="websocket__notifications-section">
+        <div className="websocket__notifications-header">
+          <h3 className="websocket__notifications-title">Real-time Notifications</h3>
+          <span className="websocket__notifications-count">
             {notifications.length} notifications
           </span>
         </div>
 
-        <div className="notifications-list">
+        <div className="websocket__notifications-list">
           {notifications.length === 0 ? (
-            <div className="empty-state">
+            <div className="websocket__empty-state">
               {connectionStatus === "connected"
                 ? "Connected! Send a message or wait for incoming data..."
                 : "Connect to start receiving notifications"}
@@ -326,21 +326,21 @@ const WebSocketComponent = () => {
             notifications.map((notification) => (
               <div
                 key={notification.id}
-                className={`notification ${getNotificationClass(
+                className={`websocket__notification ${getNotificationClass(
                   notification.type
                 )}`}
               >
-                <div className="notification-content">
-                  <div className="notification-title">{notification.title}</div>
-                  <div className="notification-message">
+                <div className="websocket__notification-content">
+                  <div className="websocket__notification-title">{notification.title}</div>
+                  <div className="websocket__notification-message">
                     {notification.message}
                   </div>
-                  <div className="notification-time">
+                  <div className="websocket__notification-time">
                     {notification.timestamp.toLocaleTimeString()}
                   </div>
                 </div>
                 <button
-                  className="notification-close"
+                  className="websocket__notification-close"
                   onClick={() => removeNotification(notification.id)}
                   title="Remove notification"
                   aria-label="Remove notification"

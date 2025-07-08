@@ -1,4 +1,4 @@
-.websocket-container {
+.websocket__container {
   max-width: 900px;
   margin: 0 auto;
   padding: 20px;
@@ -7,11 +7,11 @@
 }
 
 /* Header */
-.header {
+.websocket__header {
   margin-bottom: 30px;
 }
 
-.title {
+.websocket__title {
   font-size: 28px;
   font-weight: 700;
   color: #1f2937;
@@ -20,7 +20,7 @@
 }
 
 /* Connection Section */
-.connection-section {
+.websocket__connection-section {
   background-color: white;
   border-radius: 12px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
@@ -28,23 +28,23 @@
   margin-bottom: 24px;
 }
 
-.connection-header {
+.websocket__connection-header {
   margin-bottom: 20px;
 }
 
-.url-input-group {
+.websocket__url-input-group {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.url-label {
+.websocket__url-label {
   font-size: 14px;
   font-weight: 600;
   color: #374151;
 }
 
-.url-input {
+.websocket__url-input {
   padding: 12px 16px;
   border: 2px solid #e5e7eb;
   border-radius: 8px;
@@ -53,24 +53,24 @@
   background-color: white;
 }
 
-.url-input:focus {
+.websocket__url-input:focus {
   outline: none;
   border-color: #3b82f6;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
-.url-input:disabled {
+.websocket__url-input:disabled {
   background-color: #f9fafb;
   color: #6b7280;
   cursor: not-allowed;
 }
 
 /* Status Section */
-.status-section {
+.websocket__status-section {
   margin-top: 20px;
 }
 
-.status-header {
+.websocket__status-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -79,69 +79,69 @@
   gap: 16px;
 }
 
-.status-indicator {
+.websocket__status-indicator {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.status-dot {
+.websocket__status-dot {
   width: 14px;
   height: 14px;
   border-radius: 50%;
   animation: pulse 2s infinite;
 }
 
-.status-text {
+.websocket__status-text {
   font-size: 18px;
   font-weight: 600;
   text-transform: capitalize;
 }
 
 /* Status Colors */
-.status-connected .status-dot,
-.status-connected.status-text {
+.websocket__status--connected .websocket__status-dot,
+.websocket__status--connected.websocket__status-text {
   color: #22c55e;
 }
 
-.status-connected .status-dot {
+.websocket__status--connected .websocket__status-dot {
   background-color: #22c55e;
 }
 
-.status-connecting .status-dot,
-.status-reconnecting .status-dot {
+.websocket__status--connecting .websocket__status-dot,
+.websocket__status--reconnecting .websocket__status-dot {
   background-color: #f59e0b;
 }
 
-.status-connecting.status-text,
-.status-reconnecting.status-text {
+.websocket__status--connecting.websocket__status-text,
+.websocket__status--reconnecting.websocket__status-text {
   color: #f59e0b;
 }
 
-.status-disconnected .status-dot {
+.websocket__status--disconnected .websocket__status-dot {
   background-color: #6b7280;
 }
 
-.status-disconnected.status-text {
+.websocket__status--disconnected.websocket__status-text {
   color: #6b7280;
 }
 
-.status-failed .status-dot {
+.websocket__status--failed .websocket__status-dot {
   background-color: #ef4444;
 }
 
-.status-failed.status-text {
+.websocket__status--failed.websocket__status-text {
   color: #ef4444;
 }
 
 /* Controls */
-.controls {
+.websocket__controls {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
 }
 
-.btn {
+.websocket__button {
   padding: 10px 20px;
   border: none;
   border-radius: 8px;
@@ -152,46 +152,46 @@
   min-width: 120px;
 }
 
-.btn:hover:not(:disabled) {
+.websocket__button:hover:not(:disabled) {
   transform: translateY(-1px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-.btn:disabled {
+.websocket__button:disabled {
   cursor: not-allowed;
   opacity: 0.6;
   transform: none;
 }
 
-.btn-primary {
+.websocket__button--primary {
   background-color: #3b82f6;
   color: white;
 }
 
-.btn-success {
+.websocket__button--success {
   background-color: #22c55e;
   color: white;
 }
 
-.btn-danger {
+.websocket__button--danger {
   background-color: #ef4444;
   color: white;
 }
 
-.btn-secondary {
+.websocket__button--secondary {
   background-color: #6b7280;
   color: white;
 }
 
 /* Info Grid */
-.info-grid {
+.websocket__info-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 16px;
   margin-top: 20px;
 }
 
-.info-card {
+.websocket__info-card {
   padding: 16px;
   background-color: #f9fafb;
   border-radius: 8px;
@@ -199,11 +199,11 @@
   transition: background-color 0.2s ease;
 }
 
-.info-card:hover {
+.websocket__info-card:hover {
   background-color: #f3f4f6;
 }
 
-.info-label {
+.websocket__info-label {
   font-size: 12px;
   color: #6b7280;
   margin-bottom: 8px;
@@ -211,13 +211,13 @@
   letter-spacing: 0.5px;
 }
 
-.info-value {
+.websocket__info-value {
   font-size: 16px;
   font-weight: 700;
   color: #1f2937;
 }
 
-.checkbox-label {
+.websocket__checkbox-label {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -225,14 +225,14 @@
   font-size: 14px;
 }
 
-.checkbox {
+.websocket__checkbox {
   width: 16px;
   height: 16px;
   cursor: pointer;
 }
 
 /* Error Message */
-.error-message {
+.websocket__error-message {
   background-color: #fef2f2;
   border: 1px solid #fecaca;
   color: #dc2626;
@@ -244,14 +244,14 @@
 }
 
 /* Notifications Section */
-.notifications-section {
+.websocket__notifications-section {
   background-color: white;
   border-radius: 12px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 
-.notifications-header {
+.websocket__notifications-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -259,14 +259,14 @@
   margin-bottom: 16px;
 }
 
-.notifications-title {
+.websocket__notifications-title {
   font-size: 20px;
   font-weight: 700;
   color: #1f2937;
   margin: 0;
 }
 
-.notifications-count {
+.websocket__notifications-count {
   font-size: 14px;
   color: #6b7280;
   background-color: #f3f4f6;
@@ -274,28 +274,28 @@
   border-radius: 16px;
 }
 
-.notifications-list {
+.websocket__notifications-list {
   max-height: 500px;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: #d1d5db #f9fafb;
 }
 
-.notifications-list::-webkit-scrollbar {
+.websocket__notifications-list::-webkit-scrollbar {
   width: 6px;
 }
 
-.notifications-list::-webkit-scrollbar-track {
+.websocket__notifications-list::-webkit-scrollbar-track {
   background: #f9fafb;
 }
 
-.notifications-list::-webkit-scrollbar-thumb {
+.websocket__notifications-list::-webkit-scrollbar-thumb {
   background: #d1d5db;
   border-radius: 3px;
 }
 
 /* Notifications */
-.notification {
+.websocket__notification {
   display: flex;
   gap: 16px;
   padding: 16px 24px;
@@ -304,15 +304,15 @@
   position: relative;
 }
 
-.notification:hover {
+.websocket__notification:hover {
   background-color: #f9fafb;
 }
 
-.notification:last-child {
+.websocket__notification:last-child {
   border-bottom: none;
 }
 
-.notification::before {
+.websocket__notification::before {
   content: "";
   position: absolute;
   left: 0;
@@ -321,34 +321,34 @@
   width: 4px;
 }
 
-.notification-success::before {
+.websocket__notification--success::before {
   background-color: #22c55e;
 }
 
-.notification-error::before {
+.websocket__notification--error::before {
   background-color: #ef4444;
 }
 
-.notification-warning::before {
+.websocket__notification--warning::before {
   background-color: #f59e0b;
 }
 
-.notification-info::before {
+.websocket__notification--info::before {
   background-color: #3b82f6;
 }
 
-.notification-content {
+.websocket__notification-content {
   flex: 1;
 }
 
-.notification-title {
+.websocket__notification-title {
   font-size: 15px;
   font-weight: 600;
   color: #1f2937;
   margin-bottom: 6px;
 }
 
-.notification-message {
+.websocket__notification-message {
   font-size: 14px;
   color: #4b5563;
   line-height: 1.5;
@@ -356,12 +356,12 @@
   word-break: break-word;
 }
 
-.notification-time {
+.websocket__notification-time {
   font-size: 12px;
   color: #9ca3af;
 }
 
-.notification-close {
+.websocket__notification-close {
   background: none;
   border: none;
   cursor: pointer;
@@ -378,13 +378,13 @@
   flex-shrink: 0;
 }
 
-.notification-close:hover {
+.websocket__notification-close:hover {
   background-color: #e5e7eb;
   color: #374151;
 }
 
 /* Empty State */
-.empty-state {
+.websocket__empty-state {
   padding: 48px 24px;
   text-align: center;
   color: #6b7280;
@@ -405,45 +405,45 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .websocket-container {
+  .websocket__container {
     padding: 16px;
   }
 
-  .status-header {
+  .websocket__status-header {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .controls {
+  .websocket__controls {
     justify-content: center;
   }
 
-  .info-grid {
+  .websocket__info-grid {
     grid-template-columns: 1fr;
   }
 
-  .notifications-header {
+  .websocket__notifications-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
   }
 
-  .notification {
+  .websocket__notification {
     padding: 12px 16px;
   }
 }
 
 @media (max-width: 480px) {
-  .title {
+  .websocket__title {
     font-size: 24px;
   }
 
-  .btn {
+  .websocket__button {
     min-width: 100px;
     font-size: 13px;
   }
 
-  .controls {
+  .websocket__controls {
     flex-direction: column;
   }
 }

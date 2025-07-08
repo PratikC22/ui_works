@@ -52,7 +52,9 @@ const DigitalClockChallenge = () => {
 
       <div className='digital-clock__content-wrapper'>
         <div className='digital-clock__main-section'>
-          <h2 className='digital-clock__heading digital-clock__heading--large'>Digital Clock</h2>
+          <h2 className='digital-clock__heading digital-clock__heading--large'>
+            Digital Clock
+          </h2>
           <DigitalClock />
         </div>
       </div>

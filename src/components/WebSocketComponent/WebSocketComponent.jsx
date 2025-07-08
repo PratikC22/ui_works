@@ -1,24 +1,24 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import "./WebSocketComponent.css";
+import React, { useState, useEffect, useRef, useCallback } from 'react'
+import './WebSocketComponent.css'
 
 const WebSocketComponent = () => {
-  const [connectionStatus, setConnectionStatus] = useState("disconnected");
-  const [notifications, setNotifications] = useState([]);
-  const [retryCount, setRetryCount] = useState(0);
-  const [lastError, setLastError] = useState(null);
-  const [autoReconnect, setAutoReconnect] = useState(true);
-  const [wsUrl, setWsUrl] = useState("wss://echo.websocket.org");
-  const manualDisconnect = useRef(false);
+  const [connectionStatus, setConnectionStatus] = useState('disconnected')
+  const [notifications, setNotifications] = useState([])
+  const [retryCount, setRetryCount] = useState(0)
+  const [lastError, setLastError] = useState(null)
+  const [autoReconnect, setAutoReconnect] = useState(true)
+  const [wsUrl, setWsUrl] = useState('wss://echo.websocket.org')
+  const manualDisconnect = useRef(false)
 
-  const wsRef = useRef(null);
-  const retryTimeoutRef = useRef(null);
-  const reconnectAttempts = useRef(0);
-  const maxReconnectAttempts = 5;
-  const baseRetryDelay = 1000;
+  const wsRef = useRef(null)
+  const retryTimeoutRef = useRef(null)
+  const reconnectAttempts = useRef(0)
+  const maxReconnectAttempts = 5
+  const baseRetryDelay = 1000
 
   const getRetryDelay = useCallback((attempt) => {
-    return Math.min(baseRetryDelay * Math.pow(2, attempt), 30000);
-  }, []);
+    return Math.min(baseRetryDelay * Math.pow(2, attempt), 30000)
+  }, [])
 
   const addNotification = useCallback((type, title, message) => {
     const notification = {
@@ -27,66 +27,66 @@ const WebSocketComponent = () => {
       title,
       message,
       timestamp: new Date(),
-    };
-    setNotifications((prev) => [notification, ...prev.slice(0, 49)]);
-  }, []);
+    }
+    setNotifications((prev) => [notification, ...prev.slice(0, 49)])
+  }, [])
 
   const connect = useCallback(() => {
-    if (wsRef.current?.readyState === WebSocket.OPEN) return;
+    if (wsRef.current?.readyState === WebSocket.OPEN) return
 
-    setConnectionStatus("connecting");
-    setLastError(null);
+    setConnectionStatus('connecting')
+    setLastError(null)
 
     try {
-      const ws = new WebSocket(wsUrl);
-      wsRef.current = ws;
+      const ws = new WebSocket(wsUrl)
+      wsRef.current = ws
 
       ws.onopen = () => {
-        setConnectionStatus("connected");
-        reconnectAttempts.current = 0;
-        setRetryCount(0);
+        setConnectionStatus('connected')
+        reconnectAttempts.current = 0
+        setRetryCount(0)
         addNotification(
-          "success",
-          "Connected",
-          "WebSocket connection established"
-        );
+          'success',
+          'Connected',
+          'WebSocket connection established'
+        )
 
         // Send a test message
         ws.send(
           JSON.stringify({
-            type: "ping",
-            message: "Connection test",
+            type: 'ping',
+            message: 'Connection test',
             timestamp: new Date().toISOString(),
           })
-        );
-      };
+        )
+      }
 
       ws.onmessage = (event) => {
         try {
-          const data = JSON.parse(event.data);
+          const data = JSON.parse(event.data)
           addNotification(
-            "info",
-            "Message Received",
+            'info',
+            'Message Received',
             data.message || event.data
-          );
+          )
         } catch (error) {
-          addNotification("info", "Raw Message", event.data);
+          addNotification('info', 'Raw Message', event.data)
         }
-      };
+      }
 
       ws.onclose = (event) => {
-        console.log("WebSocket closed:", event.code, event.reason);
-        setConnectionStatus("disconnected");
+        console.log('WebSocket closed:', event.code, event.reason)
+        setConnectionStatus('disconnected')
 
-        const wasManual = manualDisconnect.current;
-        manualDisconnect.current = false;
+        const wasManual = manualDisconnect.current
+        manualDisconnect.current = false
 
         if (event.code !== 1000) {
           addNotification(
-            "warning",
-            "Connection Lost",
-            `Code: ${event.code}, Reason: ${event.reason || "Unknown"}`
-          );
+            'warning',
+            'Connection Lost',
+            `Code: ${event.code}, Reason: ${event.reason || 'Unknown'}`
+          )
         }
 
         if (
@@ -94,141 +94,141 @@ const WebSocketComponent = () => {
           autoReconnect &&
           reconnectAttempts.current < maxReconnectAttempts
         ) {
-          handleReconnection();
+          handleReconnection()
         } else if (
           !wasManual &&
           reconnectAttempts.current >= maxReconnectAttempts
         ) {
-          setLastError("Maximum reconnection attempts reached");
-          setConnectionStatus("failed");
+          setLastError('Maximum reconnection attempts reached')
+          setConnectionStatus('failed')
           addNotification(
-            "error",
-            "Connection Failed",
-            "Max retry attempts exceeded"
-          );
+            'error',
+            'Connection Failed',
+            'Max retry attempts exceeded'
+          )
         }
-      };
+      }
 
       ws.onerror = (error) => {
-        console.error("WebSocket error:", error);
-        setLastError("Connection error occurred");
+        console.error('WebSocket error:', error)
+        setLastError('Connection error occurred')
         addNotification(
-          "error",
-          "Connection Error",
-          "Failed to establish WebSocket connection"
-        );
-      };
+          'error',
+          'Connection Error',
+          'Failed to establish WebSocket connection'
+        )
+      }
     } catch (error) {
-      console.error("Failed to create WebSocket:", error);
-      setLastError(error.message);
-      setConnectionStatus("disconnected");
-      addNotification("error", "Connection Failed", error.message);
+      console.error('Failed to create WebSocket:', error)
+      setLastError(error.message)
+      setConnectionStatus('disconnected')
+      addNotification('error', 'Connection Failed', error.message)
     }
-  }, [wsUrl, autoReconnect, addNotification]);
+  }, [wsUrl, autoReconnect, addNotification])
 
   const handleReconnection = useCallback(() => {
-    const delay = getRetryDelay(reconnectAttempts.current);
-    reconnectAttempts.current++;
-    setRetryCount(reconnectAttempts.current);
-    setConnectionStatus("reconnecting");
+    const delay = getRetryDelay(reconnectAttempts.current)
+    reconnectAttempts.current++
+    setRetryCount(reconnectAttempts.current)
+    setConnectionStatus('reconnecting')
 
     retryTimeoutRef.current = setTimeout(() => {
-      connect();
-    }, delay);
-  }, [connect, getRetryDelay]);
+      connect()
+    }, delay)
+  }, [connect, getRetryDelay])
 
   const disconnect = useCallback(() => {
-    manualDisconnect.current = true;
+    manualDisconnect.current = true
 
     if (retryTimeoutRef.current) {
-      clearTimeout(retryTimeoutRef.current);
+      clearTimeout(retryTimeoutRef.current)
     }
 
     if (wsRef.current?.readyState === WebSocket.OPEN) {
-      wsRef.current.close(1000, "Manual disconnect");
+      wsRef.current.close(1000, 'Manual disconnect')
     }
 
-    setConnectionStatus("disconnected");
-    reconnectAttempts.current = 0;
-    setRetryCount(0);
+    setConnectionStatus('disconnected')
+    reconnectAttempts.current = 0
+    setRetryCount(0)
     addNotification(
-      "info",
-      "Disconnected",
-      "WebSocket connection closed manually"
-    );
-  }, [addNotification]);
+      'info',
+      'Disconnected',
+      'WebSocket connection closed manually'
+    )
+  }, [addNotification])
 
   const sendMessage = useCallback(() => {
     if (wsRef.current?.readyState === WebSocket.OPEN) {
       const message = {
-        type: "user_message",
+        type: 'user_message',
         message: `Test message sent at ${new Date().toLocaleTimeString()}`,
         timestamp: new Date().toISOString(),
-      };
-      wsRef.current.send(JSON.stringify(message));
-      addNotification("success", "Message Sent", message.message);
+      }
+      wsRef.current.send(JSON.stringify(message))
+      addNotification('success', 'Message Sent', message.message)
     } else {
-      addNotification("error", "Send Failed", "WebSocket is not connected");
+      addNotification('error', 'Send Failed', 'WebSocket is not connected')
     }
-  }, [addNotification]);
+  }, [addNotification])
 
   const clearNotifications = useCallback(() => {
-    setNotifications([]);
-  }, []);
+    setNotifications([])
+  }, [])
 
   const removeNotification = useCallback((id) => {
-    setNotifications((prev) => prev.filter((notif) => notif.id !== id));
-  }, []);
+    setNotifications((prev) => prev.filter((notif) => notif.id !== id))
+  }, [])
 
   useEffect(() => {
     return () => {
       if (retryTimeoutRef.current) {
-        clearTimeout(retryTimeoutRef.current);
+        clearTimeout(retryTimeoutRef.current)
       }
       if (wsRef.current?.readyState === WebSocket.OPEN) {
-        wsRef.current.close();
+        wsRef.current.close()
       }
-    };
-  }, []);
+    }
+  }, [])
 
   const getStatusClass = (status) => {
-    return `status-${status}`;
-  };
+    return `status-${status}`
+  }
 
   const getNotificationClass = (type) => {
-    return `notification-${type}`;
-  };
+    return `notification-${type}`
+  }
 
   return (
-    <div className="websocket__container">
-      <div className="websocket__header">
-        <h1 className="websocket__title">WebSocket Integration</h1>
+    <div className='websocket__container'>
+      <div className='websocket__header'>
+        <h1 className='websocket__title'>WebSocket Integration</h1>
       </div>
 
-      <div className="websocket__connection-section">
-        <div className="websocket__connection-header">
-          <div className="websocket__url-input-group">
-            <label htmlFor="wsUrl" className="websocket__url-label">
+      <div className='websocket__connection-section'>
+        <div className='websocket__connection-header'>
+          <div className='websocket__url-input-group'>
+            <label htmlFor='wsUrl' className='websocket__url-label'>
               WebSocket URL:
             </label>
             <input
-              id="wsUrl"
-              type="text"
-              className="websocket__url-input"
+              id='wsUrl'
+              type='text'
+              className='websocket__url-input'
               value={wsUrl}
               onChange={(e) => setWsUrl(e.target.value)}
               disabled={
-                connectionStatus === "connected" ||
-                connectionStatus === "connecting"
+                connectionStatus === 'connected' ||
+                connectionStatus === 'connecting'
               }
-              placeholder="wss://echo.websocket.org"
+              placeholder='wss://echo.websocket.org'
             />
           </div>
         </div>
 
-        <div className="websocket__status-section">
-          <div className="websocket__status-header">
-            <div className="websocket__status-indicator">
+        <div className='websocket__status-section'>
+          <div className='websocket__status-header'>
+            <div className='websocket__status-indicator'>
               <div
                 className={`websocket__status-dot ${getStatusClass(connectionStatus)}`}
               />
@@ -240,31 +240,31 @@ const WebSocketComponent = () => {
               </span>
             </div>
 
-            <div className="websocket__controls">
+            <div className='websocket__controls'>
               <button
                 className={`websocket__button ${
-                  connectionStatus === "connected"
-                    ? "websocket__button--danger"
-                    : "websocket__button--success"
+                  connectionStatus === 'connected'
+                    ? 'websocket__button--danger'
+                    : 'websocket__button--success'
                 }`}
                 onClick={
-                  connectionStatus === "connected" ? disconnect : connect
+                  connectionStatus === 'connected' ? disconnect : connect
                 }
-                disabled={connectionStatus === "connecting"}
+                disabled={connectionStatus === 'connecting'}
               >
-                {connectionStatus === "connected" ? "Disconnect" : "Connect"}
+                {connectionStatus === 'connected' ? 'Disconnect' : 'Connect'}
               </button>
 
               <button
-                className="websocket__button websocket__button--primary"
+                className='websocket__button websocket__button--primary'
                 onClick={sendMessage}
-                disabled={connectionStatus !== "connected"}
+                disabled={connectionStatus !== 'connected'}
               >
                 Send Test Message
               </button>
 
               <button
-                className="websocket__button websocket__button--secondary"
+                className='websocket__button websocket__button--secondary'
                 onClick={clearNotifications}
               >
                 Clear All
@@ -272,55 +272,61 @@ const WebSocketComponent = () => {
             </div>
           </div>
 
-          <div className="websocket__info-grid">
-            <div className="websocket__info-card">
-              <div className="websocket__info-label">Status</div>
-              <div className="websocket__info-value">{connectionStatus}</div>
+          <div className='websocket__info-grid'>
+            <div className='websocket__info-card'>
+              <div className='websocket__info-label'>Status</div>
+              <div className='websocket__info-value'>{connectionStatus}</div>
             </div>
-            <div className="websocket__info-card">
-              <div className="websocket__info-label">Retry Attempts</div>
-              <div className="websocket__info-value">
+            <div className='websocket__info-card'>
+              <div className='websocket__info-label'>Retry Attempts</div>
+              <div className='websocket__info-value'>
                 {retryCount}/{maxReconnectAttempts}
               </div>
             </div>
-            <div className="websocket__info-card">
-              <div className="websocket__info-label">Notifications</div>
-              <div className="websocket__info-value">{notifications.length}</div>
+            <div className='websocket__info-card'>
+              <div className='websocket__info-label'>Notifications</div>
+              <div className='websocket__info-value'>
+                {notifications.length}
+              </div>
             </div>
-            <div className="websocket__info-card">
-              <div className="websocket__info-label">Auto Reconnect</div>
-              <div className="websocket__info-value">
-                <label className="websocket__checkbox-label">
+            <div className='websocket__info-card'>
+              <div className='websocket__info-label'>Auto Reconnect</div>
+              <div className='websocket__info-value'>
+                <label className='websocket__checkbox-label'>
                   <input
-                    type="checkbox"
-                  className="websocket__checkbox"
+                    type='checkbox'
+                    className='websocket__checkbox'
                     checked={autoReconnect}
                     onChange={(e) => setAutoReconnect(e.target.checked)}
                   />
-                  {autoReconnect ? "Enabled" : "Disabled"}
+                  {autoReconnect ? 'Enabled' : 'Disabled'}
                 </label>
               </div>
             </div>
           </div>
 
-          {lastError && <div className="websocket__error-message">Error: {lastError}</div>}
+          {lastError && (
+            <div className='websocket__error-message'>Error: {lastError}</div>
+          )}
         </div>
       </div>
 
-      <div className="websocket__notifications-section">
-        <div className="websocket__notifications-header">
-          <h3 className="websocket__notifications-title">Real-time Notifications</h3>
-          <span className="websocket__notifications-count">
+      <div className='websocket__notifications-section'>
+        <div className='websocket__notifications-header'>
+          <h3 className='websocket__notifications-title'>
+            Real-time Notifications
+          </h3>
+          <span className='websocket__notifications-count'>
             {notifications.length} notifications
           </span>
         </div>
 
-        <div className="websocket__notifications-list">
+        <div className='websocket__notifications-list'>
           {notifications.length === 0 ? (
-            <div className="websocket__empty-state">
-              {connectionStatus === "connected"
-                ? "Connected! Send a message or wait for incoming data..."
-                : "Connect to start receiving notifications"}
+            <div className='websocket__empty-state'>
+              {connectionStatus === 'connected'
+                ? 'Connected! Send a message or wait for incoming data...'
+                : 'Connect to start receiving notifications'}
             </div>
           ) : (
             notifications.map((notification) => (
@@ -330,20 +336,22 @@ const WebSocketComponent = () => {
                   notification.type
                 )}`}
               >
-                <div className="websocket__notification-content">
-                  <div className="websocket__notification-title">{notification.title}</div>
-                  <div className="websocket__notification-message">
+                <div className='websocket__notification-content'>
+                  <div className='websocket__notification-title'>
+                    {notification.title}
+                  </div>
+                  <div className='websocket__notification-message'>
                     {notification.message}
                   </div>
-                  <div className="websocket__notification-time">
+                  <div className='websocket__notification-time'>
                     {notification.timestamp.toLocaleTimeString()}
                   </div>
                 </div>
                 <button
-                  className="websocket__notification-close"
+                  className='websocket__notification-close'
                   onClick={() => removeNotification(notification.id)}
-                  title="Remove notification"
-                  aria-label="Remove notification"
+                  title='Remove notification'
+                  aria-label='Remove notification'
                 >
                   ×
                 </button>
@@ -353,7 +361,7 @@ const WebSocketComponent = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default WebSocketComponent;
+export default WebSocketComponent

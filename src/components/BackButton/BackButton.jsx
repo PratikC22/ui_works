@@ -1,17 +1,17 @@
-import * as React from "react";
-import { useNavigate } from "react-router-dom";
-import "./BackButton.css";
+import * as React from 'react'
+import { useNavigate } from 'react-router-dom'
+import './BackButton.css'
 
 const BackButton = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   return (
-    <button onClick={() => navigate(-1)} className="back-button">
+    <button onClick={() => navigate(-1)} className='back-button'>
       ← Back
     </button>
-  );
-};
+  )
+}
 
-BackButton.displayName = "BackButton";
+BackButton.displayName = 'BackButton'
 
-export default BackButton;
+export default BackButton

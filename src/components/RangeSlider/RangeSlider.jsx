@@ -44,8 +44,7 @@ const RangeSlider = () => {
                 className='range-slider__color-box'
                 style={{ backgroundColor: '#f9f9f9' }}
               ></span>{' '}
-              Use background{' '}
-              <code className='range-slider__code'>#f9f9f9</code>{' '}
+              Use background <code className='range-slider__code'>#f9f9f9</code>{' '}
               for panels
             </li>
             <li className='range-slider__side-panel-item'>
@@ -53,18 +52,15 @@ const RangeSlider = () => {
                 className='range-slider__color-box'
                 style={{ backgroundColor: '#111', borderColor: '#000' }}
               ></span>{' '}
-              Use{' '}
-              <code className='range-slider__code'>color: #111</code>{' '}
-              for labels
+              Use <code className='range-slider__code'>color: #111</code> for
+              labels
             </li>
             <li className='range-slider__side-panel-item'>
               <span
                 className='range-slider__color-box'
                 style={{ backgroundColor: '#ddd' }}
               ></span>{' '}
-              Use{' '}
-              <code className='range-slider__code'>#ddd</code>{' '}
-              for track
+              Use <code className='range-slider__code'>#ddd</code> for track
             </li>
             <li className='range-slider__side-panel-item'>
               Use{' '}
@@ -72,14 +68,12 @@ const RangeSlider = () => {
               to convert
             </li>
             <li className='range-slider__side-panel-item'>
-              Set{' '}
-              <code className='range-slider__code'>cursor: pointer</code>{' '}
-              on input
+              Set <code className='range-slider__code'>cursor: pointer</code> on
+              input
             </li>
             <li className='range-slider__side-panel-item'>
-              Use{' '}
-              <code className='range-slider__code'>htmlFor</code>{' '}
-              to link label
+              Use <code className='range-slider__code'>htmlFor</code> to link
+              label
             </li>
           </ul>
         </aside>

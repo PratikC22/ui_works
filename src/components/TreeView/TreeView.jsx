@@ -15,7 +15,9 @@ const TreeNode = ({ node, level = 0 }) => {
       <div className={`tree-view__node-container`} style={{ '--level': level }}>
         <div
           className={`tree-view__node ${
-            hasChildren ? 'tree-view__node--has-children' : 'tree-view__node--no-children'
+            hasChildren
+              ? 'tree-view__node--has-children'
+              : 'tree-view__node--no-children'
           } ${level === 0 ? 'tree-view__node--root' : ''} ${
             collapsed ? 'tree-view__node--collapsed' : ''
           }`}
@@ -30,7 +32,9 @@ const TreeNode = ({ node, level = 0 }) => {
             }
           }}
         >
-          <span className='tree-view__node-label'>{node.label || 'Tree Node'}</span>
+          <span className='tree-view__node-label'>
+            {node.label || 'Tree Node'}
+          </span>
         </div>
       </div>
 
@@ -65,9 +69,15 @@ const TreeView = ({ data = [] }) => {
           <aside className='tree-view__panel'>
             <h2 className='tree-view__panel-header'>Rules</h2>
             <ul className='tree-view__list'>
-              <li className='tree-view__list-item'>Data nodes must have unique IDs</li>
-              <li className='tree-view__list-item'>Each node displays its label</li>
-              <li className='tree-view__list-item'>Supports nested tree structure</li>
+              <li className='tree-view__list-item'>
+                Data nodes must have unique IDs
+              </li>
+              <li className='tree-view__list-item'>
+                Each node displays its label
+              </li>
+              <li className='tree-view__list-item'>
+                Supports nested tree structure
+              </li>
               <li className='tree-view__list-item'>
                 Nodes can be expanded/collapsed by clicking
               </li>
@@ -106,11 +116,7 @@ const TreeView = ({ data = [] }) => {
         <h1 className='tree-view__header'>Tree View</h1>
         <div className='tree-view__tree-container'>
           {data.length === 0 && (
-            <div
-              className='tree-view__empty-state'
-            >
-              No nodes available
-            </div>
+            <div className='tree-view__empty-state'>No nodes available</div>
           )}
           {data.map((node) => (
             <TreeNode key={node.id} node={node} />

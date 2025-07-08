@@ -1,6 +1,6 @@
 .tree-view__node {
   user-select: none;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #222;
   padding: 8px 0;
   border-bottom: 1px solid #e0e0e0;
@@ -33,7 +33,7 @@
 }
 /* Arrow icon as before pseudo */
 .tree-view__node--has-children::before {
-  content: "";
+  content: '';
   display: inline-block;
   position: absolute;
   left: calc(var(--level) * 24px);

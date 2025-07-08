@@ -44,22 +44,29 @@ const AnalogClock = () => {
           <ul>
             <li>Clock diameter: 300px</li>
             <li>
-              Border: <span className='analog-clock__color-box analog-clock__color--333' /> #333 (4px)
+              Border:{' '}
+              <span className='analog-clock__color-box analog-clock__color--333' />{' '}
+              #333 (4px)
             </li>
             <li>
-              Background: <span className='analog-clock__color-box analog-clock__color--fff' /> #fff
+              Background:{' '}
+              <span className='analog-clock__color-box analog-clock__color--fff' />{' '}
+              #fff
             </li>
             <li>
-              Hour hand: <span className='analog-clock__color-box analog-clock__color--000' /> #000 (6px
-              wide, 80px long)
+              Hour hand:{' '}
+              <span className='analog-clock__color-box analog-clock__color--000' />{' '}
+              #000 (6px wide, 80px long)
             </li>
             <li>
-              Minute hand: <span className='analog-clock__color-box analog-clock__color--000' /> #000 (4px
-              wide, 110px long)
+              Minute hand:{' '}
+              <span className='analog-clock__color-box analog-clock__color--000' />{' '}
+              #000 (4px wide, 110px long)
             </li>
             <li>
-              Second hand: <span className='analog-clock__color-box analog-clock__color--e74c3c' /> #e74c3c
-              (2px wide, 120px long)
+              Second hand:{' '}
+              <span className='analog-clock__color-box analog-clock__color--e74c3c' />{' '}
+              #e74c3c (2px wide, 120px long)
             </li>
           </ul>
         </div>

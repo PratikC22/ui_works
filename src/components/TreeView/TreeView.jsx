@@ -1,12 +1,13 @@
-import * as React from "react";
-import Sidebar from "../Sidebar/Sidebar.jsx";
-import BackButton from "../BackButton/BackButton.jsx";
+import * as React from 'react'
+import Sidebar from '../Sidebar/Sidebar.jsx'
+import BackButton from '../BackButton/BackButton.jsx'
+import { useSEO } from '../../utils/useSEO'
 
 const TreeNode = ({ node, level = 0 }) => {
-  const [collapsed, setCollapsed] = React.useState(false);
-  const hasChildren = node.children && node.children.length > 0;
+  const [collapsed, setCollapsed] = React.useState(false)
+  const hasChildren = node.children && node.children.length > 0
 
-  const toggleCollapse = () => setCollapsed(!collapsed);
+  const toggleCollapse = () => setCollapsed(!collapsed)
 
   return (
     <>
@@ -68,25 +69,25 @@ const TreeNode = ({ node, level = 0 }) => {
         }
       `}</style>
 
-      <div className={`tree-node-container`} style={{ "--level": level }}>
+      <div className={`tree-node-container`} style={{ '--level': level }}>
         <div
           className={`tree-node ${
-            hasChildren ? "has-children" : "no-children"
-          } ${level === 0 ? "tree-node-root" : ""} ${
-            collapsed ? "collapsed" : ""
+            hasChildren ? 'has-children' : 'no-children'
+          } ${level === 0 ? 'tree-node-root' : ''} ${
+            collapsed ? 'collapsed' : ''
           }`}
-          role={hasChildren ? "button" : undefined}
+          role={hasChildren ? 'button' : undefined}
           tabIndex={hasChildren ? 0 : undefined}
           aria-expanded={!collapsed}
           onClick={hasChildren ? toggleCollapse : undefined}
           onKeyDown={(e) => {
-            if (hasChildren && (e.key === "Enter" || e.key === " ")) {
-              e.preventDefault();
-              toggleCollapse();
+            if (hasChildren && (e.key === 'Enter' || e.key === ' ')) {
+              e.preventDefault()
+              toggleCollapse()
             }
           }}
         >
-          <span className="tree-node-label">{node.label || "Tree Node"}</span>
+          <span className='tree-node-label'>{node.label || 'Tree Node'}</span>
         </div>
       </div>
 
@@ -98,81 +99,82 @@ const TreeNode = ({ node, level = 0 }) => {
         </div>
       )}
     </>
-  );
-};
+  )
+}
 
 const TreeView = ({ data = [] }) => {
-  const [copySuccess, setCopySuccess] = React.useState("");
-  const configText = JSON.stringify(data, null, 2);
+  useSEO('/treeview')
+  const [copySuccess, setCopySuccess] = React.useState('')
+  const configText = JSON.stringify(data, null, 2)
 
   const handleCopy = () => {
     navigator.clipboard.writeText(configText).then(() => {
-      setCopySuccess("Copied!");
-      setTimeout(() => setCopySuccess(""), 2000);
-    });
-  };
+      setCopySuccess('Copied!')
+      setTimeout(() => setCopySuccess(''), 2000)
+    })
+  }
 
   const styles = {
     container: {
-      width: "100vw",
-      display: "flex",
-      alignItems: "flex-start",
-      color: "#222",
-      height: "100%",
+      width: '100vw',
+      display: 'flex',
+      alignItems: 'flex-start',
+      color: '#222',
+      height: '100%',
     },
     mainSection: {
-      width: "100%",
-      textAlign: "center",
-      padding: "72px",
+      width: '100%',
+      textAlign: 'center',
+      padding: '72px',
     },
     header: {
       fontSize: 24,
       marginBottom: 24,
-      color: "#222",
-      userSelect: "none",
+      color: '#222',
+      userSelect: 'none',
     },
     treeContainer: {
-      border: "1px solid #ddd",
+      border: '1px solid #ddd',
       borderRadius: 12,
-      background: "#f9f9f9",
-      boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
+      background: '#f9f9f9',
+      boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
       padding: 20,
       maxHeight: 400,
-      overflowY: "auto",
-      textAlign: "left",
+      overflowY: 'auto',
+      textAlign: 'left',
     },
     row: {
-      display: "flex",
-      width: "100%",
+      display: 'flex',
+      width: '100%',
       maxWidth: 1280,
       gap: 24,
-      justifyContent: "space-between",
-      flexWrap: "wrap",
+      justifyContent: 'space-between',
+      flexWrap: 'wrap',
     },
     panel: {
-      flex: "1 1 300px",
-      background: "#f9f9f9",
+      flex: '1 1 300px',
+      background: '#f9f9f9',
       padding: 24,
       borderRadius: 12,
-      boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
+      boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
       fontSize: 14,
       minWidth: 280,
-      position: "relative",
-      color: "#222",
-      userSelect: "text",
+      position: 'relative',
+      color: '#222',
+      userSelect: 'text',
     },
     panelHeader: {
       fontSize: 18,
       marginBottom: 12,
-      color: "#111",
-      borderBottom: "1px solid #ccc",
+      color: '#111',
+      borderBottom: '1px solid #ccc',
       paddingBottom: 4,
-      margin: "0 0 12px 0",
+      margin: '0 0 12px 0',
       fontWeight: 700,
-      userSelect: "none",
+      userSelect: 'none',
     },
     list: {
-      listStyle: "disc",
+      listStyle: 'disc',
       paddingLeft: 20,
       margin: 0,
     },
@@ -180,43 +182,43 @@ const TreeView = ({ data = [] }) => {
       marginBottom: 8,
     },
     configBox: {
-      backgroundColor: "#eee",
+      backgroundColor: '#eee',
       padding: 12,
       borderRadius: 6,
-      fontFamily: "monospace",
+      fontFamily: 'monospace',
       fontSize: 13,
       maxHeight: 150,
-      overflowY: "auto",
-      whiteSpace: "pre-wrap",
-      wordBreak: "break-word",
+      overflowY: 'auto',
+      whiteSpace: 'pre-wrap',
+      wordBreak: 'break-word',
       marginTop: 0,
       marginBottom: 32,
-      userSelect: "text",
+      userSelect: 'text',
     },
     copyButton: {
-      position: "absolute",
+      position: 'absolute',
       top: 16,
       right: 16,
-      backgroundColor: "#444",
-      border: "none",
-      color: "#fff",
-      padding: "6px 12px",
+      backgroundColor: '#444',
+      border: 'none',
+      color: '#fff',
+      padding: '6px 12px',
       fontSize: 12,
       borderRadius: 4,
-      cursor: "pointer",
-      userSelect: "none",
-      transition: "background-color 0.2s ease",
+      cursor: 'pointer',
+      userSelect: 'none',
+      transition: 'background-color 0.2s ease',
     },
     copySuccessText: {
-      position: "absolute",
+      position: 'absolute',
       top: 50,
       right: 16,
       fontSize: 12,
-      color: "green",
+      color: 'green',
       fontWeight: 600,
-      userSelect: "none",
+      userSelect: 'none',
     },
-  };
+  }
 
   return (
     <div style={styles.container}>
@@ -248,12 +250,12 @@ const TreeView = ({ data = [] }) => {
               style={styles.copyButton}
               onClick={handleCopy}
               onMouseOver={(e) =>
-                (e.currentTarget.style.backgroundColor = "#222")
+                (e.currentTarget.style.backgroundColor = '#222')
               }
               onMouseOut={(e) =>
-                (e.currentTarget.style.backgroundColor = "#444")
+                (e.currentTarget.style.backgroundColor = '#444')
               }
-              aria-label="Copy config JSON to clipboard"
+              aria-label='Copy config JSON to clipboard'
             >
               Copy
             </button>
@@ -268,7 +270,7 @@ const TreeView = ({ data = [] }) => {
         <div style={styles.treeContainer}>
           {data.length === 0 && (
             <div
-              style={{ color: "#555", fontStyle: "italic", padding: "8px 0" }}
+              style={{ color: '#555', fontStyle: 'italic', padding: '8px 0' }}
             >
               No nodes available
             </div>
@@ -279,7 +281,7 @@ const TreeView = ({ data = [] }) => {
         </div>
       </section>
     </div>
-  );
-};
+  )
+}
 
-export default TreeView;
+export default TreeView

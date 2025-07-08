@@ -1,17 +1,19 @@
-import React from "react";
-import WebSocketComponent from "./WebSocketComponent";
-import BackButton from "../BackButton/BackButton";
-import Sidebar from "../Sidebar/Sidebar";
-import "./WebSocketWrapper.css";
+import React from 'react'
+import WebSocketComponent from './WebSocketComponent'
+import BackButton from '../BackButton/BackButton'
+import Sidebar from '../Sidebar/Sidebar'
+import './WebSocketWrapper.css'
+import { useSEO } from '../../utils/useSEO'
 
 const WebSocketWrapper = () => {
+  useSEO('/websocket')
   return (
-    <div className="ws-wrapper">
+    <div className='ws-wrapper'>
       <Sidebar>
         <BackButton />
-        <div className="ws-panel">
-          <h2 className="ws-panel-title">Rules</h2>
-          <ul className="ws-panel-list">
+        <div className='ws-panel'>
+          <h2 className='ws-panel-title'>Rules</h2>
+          <ul className='ws-panel-list'>
             <li>Connect to a given WebSocket URL</li>
             <li>Manual connect/disconnect functionality</li>
             <li>Auto reconnect with exponential backoff</li>
@@ -20,9 +22,9 @@ const WebSocketWrapper = () => {
             <li>Use a separate CSS file for styling</li>
           </ul>
         </div>
-        <div className="ws-panel">
-          <h2 className="ws-panel-title">Hints</h2>
-          <ul className="ws-panel-list">
+        <div className='ws-panel'>
+          <h2 className='ws-panel-title'>Hints</h2>
+          <ul className='ws-panel-list'>
             <li>
               Use <code>useRef</code> for the WebSocket instance
             </li>
@@ -37,11 +39,11 @@ const WebSocketWrapper = () => {
         </div>
       </Sidebar>
 
-      <div className="ws-main">
+      <div className='ws-main'>
         <WebSocketComponent />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default WebSocketWrapper;
+export default WebSocketWrapper

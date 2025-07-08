@@ -2,10 +2,12 @@ import React from 'react'
 import Sidebar from '../Sidebar/Sidebar'
 import BackButton from '../BackButton/BackButton'
 import './Calendar.css'
+import { useSEO } from '../../utils/useSEO'
 
 const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
 const Calendar = () => {
+  useSEO('/calendar')
   const [year, setYear] = React.useState(new Date().getFullYear())
   const [month, setMonth] = React.useState(new Date().getMonth())
 

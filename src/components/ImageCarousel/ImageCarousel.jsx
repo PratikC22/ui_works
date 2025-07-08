@@ -2,6 +2,7 @@ import React from 'react'
 import BackButton from '../BackButton/BackButton'
 import Sidebar from '../Sidebar/Sidebar'
 import './ImageCarousel.css'
+import { useSEO } from '../../utils/useSEO'
 
 // Sample images for demonstration
 const sampleImages = [
@@ -50,6 +51,7 @@ const sampleImages = [
 ]
 
 const ImageCarousel = () => {
+  useSEO('/carousel')
   const [currentIndex, setCurrentIndex] = React.useState(0)
   const [isAutoPlay, setIsAutoPlay] = React.useState(false)
   const [imageLoaded, setImageLoaded] = React.useState(false)

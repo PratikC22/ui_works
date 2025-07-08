@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import BackButton from '../BackButton/BackButton'
 import Sidebar from '../Sidebar/Sidebar'
+import { useSEO } from '../../utils/useSEO'
 
 const styles = {
   container: {
@@ -79,6 +80,7 @@ const styles = {
 }
 
 const RangeSlider = () => {
+  useSEO('/slider')
   const [value, setValue] = useState(50)
 
   return (

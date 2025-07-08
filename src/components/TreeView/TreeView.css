@@ -107,6 +107,7 @@
   position: relative;
   color: #222;
   user-select: text;
+  overflow-y: auto;
 }
 
 .tree-view__panel-header {

@@ -50,6 +50,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   font-size: 14px;
   min-width: 280px;
+  overflow-y: auto;
 }
 
 .range-slider__side-panel-title {

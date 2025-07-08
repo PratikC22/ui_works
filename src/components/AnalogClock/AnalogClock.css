@@ -26,9 +26,10 @@
   padding: 24px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  font-family: "Segoe UI", sans-serif;
+  font-family: 'Segoe UI', sans-serif;
   font-size: 14px;
   color: #222;
+  overflow-y: auto;
 }
 
 .AnalogClock__side-panel h2 {
@@ -57,6 +58,7 @@
   align-items: center;
   justify-content: center;
   margin-top: 6rem;
+  overflow-y: auto;
 }
 
 .analog-clock__header {
@@ -81,7 +83,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  font-family: "Segoe UI", sans-serif;
+  font-family: 'Segoe UI', sans-serif;
   font-size: 18px;
   font-weight: 600;
   color: #111;

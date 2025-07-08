@@ -70,6 +70,7 @@
   background-color: #f9fafb;
   border: 1px solid #ddd;
   border-radius: 8px;
+  overflow-y: auto;
 }
 
 .calendar__panel-title {

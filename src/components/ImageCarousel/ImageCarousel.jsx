@@ -4,8 +4,7 @@ import Sidebar from '../Sidebar/Sidebar'
 import './ImageCarousel.css'
 import { useSEO } from '../../utils/useSEO'
 
-// Sample images for demonstration
-const sampleImages = [
+const data = [
   {
     id: 1,
     src: 'https://picsum.photos/800/600?random=1',
@@ -55,17 +54,17 @@ const ImageCarousel = () => {
   const [currentIndex, setCurrentIndex] = React.useState(0)
   const [isAutoPlay, setIsAutoPlay] = React.useState(false)
   const [imageLoaded, setImageLoaded] = React.useState(false)
+  const [copySuccess, setCopySuccess] = React.useState('')
+  const configText = JSON.stringify(data, null, 2)
 
   const nextImage = () => {
     setImageLoaded(false)
-    setCurrentIndex((prev) => (prev + 1) % sampleImages.length)
+    setCurrentIndex((prev) => (prev + 1) % data.length)
   }
 
   const prevImage = () => {
     setImageLoaded(false)
-    setCurrentIndex(
-      (prev) => (prev - 1 + sampleImages.length) % sampleImages.length
-    )
+    setCurrentIndex((prev) => (prev - 1 + data.length) % data.length)
   }
 
   const goToImage = (index) => {
@@ -101,7 +100,14 @@ const ImageCarousel = () => {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [])
 
-  const currentImage = sampleImages[currentIndex]
+  const currentImage = data[currentIndex]
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(configText).then(() => {
+      setCopySuccess('Copied!')
+      setTimeout(() => setCopySuccess(''), 2000)
+    })
+  }
 
   return (
     <section className='carousel__container'>
@@ -117,7 +123,7 @@ const ImageCarousel = () => {
             </p>
             <div className='carousel__image-meta'>
               <span className='carousel__image-counter'>
-                {currentIndex + 1} of {sampleImages.length}
+                {currentIndex + 1} of {data.length}
               </span>
             </div>
             <button
@@ -134,7 +140,7 @@ const ImageCarousel = () => {
         <div className='carousel__panel carousel__panel--thumbnails'>
           <h2 className='carousel__panel-title'>Thumbnails</h2>
           <div className='carousel__thumbnails'>
-            {sampleImages.map((image, index) => (
+            {data.map((image, index) => (
               <button
                 key={image.id}
                 className={`carousel__thumbnail ${
@@ -208,6 +214,25 @@ const ImageCarousel = () => {
             </li>
           </ul>
         </div>
+
+        <div className='carousel__panel carousel__panel--hints'>
+          <h2 className='carousel__panel-title'>Sample Data</h2>
+          <pre className='tree-view__config-box'>{configText}</pre>
+          <button
+            className='carousel__copy-button'
+            onClick={handleCopy}
+            onMouseOver={(e) =>
+              (e.currentTarget.style.backgroundColor = '#222')
+            }
+            onMouseOut={(e) => (e.currentTarget.style.backgroundColor = '#444')}
+            aria-label='Copy config JSON to clipboard'
+          >
+            Copy
+          </button>
+          {copySuccess && (
+            <div className='tree-view__copy-success-text'>{copySuccess}</div>
+          )}
+        </div>
       </Sidebar>
 
       <div className='carousel__main'>
@@ -246,7 +271,7 @@ const ImageCarousel = () => {
         </div>
 
         <div className='carousel__indicators'>
-          {sampleImages.map((_, index) => (
+          {data.map((_, index) => (
             <button
               key={index}
               className={`carousel__indicator ${

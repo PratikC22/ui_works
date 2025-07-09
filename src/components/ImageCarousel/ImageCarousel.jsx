@@ -163,10 +163,24 @@ const ImageCarousel = () => {
           <h2 className='carousel__panel-title'>Rules</h2>
           <ul className='carousel__panel-list'>
             <li className='carousel__panel-item'>
-              Navigate with arrow buttons or keys
+              Navigate with arrow buttons or left/right arrow keys
             </li>
-            <li className='carousel__panel-item'>Click thumbnails to jump</li>
-            <li className='carousel__panel-item'>Smooth transitions</li>
+            <li className='carousel__panel-item'>
+              Click thumbnails to jump to any image instantly
+            </li>
+            <li className='carousel__panel-item'>
+              Auto-play cycles through images every 3 seconds
+            </li>
+            <li className='carousel__panel-item'>
+              Images should fade in smoothly when loaded
+            </li>
+            <li className='carousel__panel-item'>
+              Navigation wraps around (last → first, first → last)
+            </li>
+            <li className='carousel__panel-item'>Use semantic HTML elements</li>
+            <li className='carousel__panel-item'>
+              Include proper ARIA labels and keyboard accessibility
+            </li>
           </ul>
         </div>
 

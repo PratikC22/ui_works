@@ -47,6 +47,10 @@
     "title": "Modal Dialog – UI Works",
     "description": "Accessible modal dialog with focus trap, keyboard navigation, and ARIA roles."
   },
+  "/multistep-form": {
+    "title": "Multi-Step Form – UI Works",
+    "description": "A multi-step form with validation, progress indicator, and accessible navigation."
+  },
   "/guess-my-age": {
     "title": "Guess My Age – UI Works",
     "description": "Predict age from a name using an external API."

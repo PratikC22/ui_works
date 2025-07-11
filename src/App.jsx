@@ -73,6 +73,13 @@ const Home = () => {
             ARIA roles.
           </p>
         </Link>
+        <Link className='challenge-card' to='/multistep-form'>
+          <div className='card-icon'>📝</div>
+          <h3>Multi-Step Form</h3>
+          <p>
+            A form split into steps, with validation and progress indicator.
+          </p>
+        </Link>
       </div>
     </div>
   )

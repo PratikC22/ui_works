@@ -15,6 +15,7 @@ import Calendar from './components/Calendar/Calendar.jsx'
 import GuessMyAge from './components/GuessMyAge/GuessMyAge.jsx'
 import ImageCarousel from './components/ImageCarousel/ImageCarousel.jsx'
 import Modal from './components/Modal/Modal.jsx'
+import MultiStepForm from './components/MultiStepForm/MultiStepForm.jsx'
 
 const nestedSampleData = [
   {
@@ -54,6 +55,7 @@ const router = createBrowserRouter([
       { path: 'guess-my-age', element: <GuessMyAge /> },
       { path: 'carousel', element: <ImageCarousel /> },
       { path: 'modal', element: <Modal /> },
+      { path: 'multistep-form', element: <MultiStepForm /> },
     ],
   },
 ])

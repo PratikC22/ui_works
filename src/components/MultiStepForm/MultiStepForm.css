@@ -2,17 +2,17 @@
   display: flex;
   width: 100vw;
   height: calc(100vh - 68px);
-  background: var(--ui-bg-main);
+  background: var(--bg-main);
 }
 
 .sidebar {
   /* Parity with rest of app */
   width: 400px;
-  background-color: var(--ui-bg-sidebar);
+  background-color: var(--bg-sidebar);
   display: flex;
   flex-direction: column;
   padding: 24px;
-  box-shadow: var(--ui-sidebar-shadow);
+  box-shadow: var(--sidebar-shadow);
   overflow-y: auto;
   flex-shrink: 0;
   height: 100%;
@@ -54,36 +54,36 @@
   height: 100%;
   overflow-y: auto;
   min-width: 0;
-  background: var(--ui-bg-main);
+  background: var(--bg-main);
 }
 
 .multi-step-form__header {
   font-size: 24px;
   margin-bottom: 24px;
   text-align: center;
-  color: var(--ui-text-main);
+  color: var(--text-main);
 }
 
 .multi-step-form__progress {
   width: 100%;
   max-width: 400px;
   height: 8px;
-  background: var(--ui-progress-bg);
-  border-radius: var(--ui-border-radius);
+  background: var(--progress-bg);
+  border-radius: var(--border-radius-sm);
   margin-bottom: 32px;
   overflow: hidden;
 }
 .multi-step-form__progress-bar {
   height: 100%;
-  background: var(--ui-btn-primary);
-  border-radius: var(--ui-border-radius);
+  background: var(--btn-active);
+  border-radius: var(--border-radius-sm);
   transition: width 0.3s;
 }
 
 .multi-step-form__form {
-  background: var(--ui-bg-card);
+  background: var(--bg-card);
   border-radius: 12px;
-  box-shadow: var(--ui-shadow-modal);
+  box-shadow: var(--shadow-modal);
   padding: 32px 24px;
   width: 100%;
   max-width: 400px;
@@ -111,13 +111,13 @@
 
 .multi-step-form__input {
   padding: 8px;
-  border: 1px solid var(--ui-border);
-  border-radius: var(--ui-border-radius);
+  border: 1px solid var(--border-light);
+  border-radius: var(--border-radius-sm);
   font-size: 1rem;
 }
 
 .multi-step-form__error {
-  color: var(--ui-error);
+  color: var(--error);
   font-size: 0.95rem;
   margin-top: 2px;
 }
@@ -127,7 +127,7 @@
   border-radius: 8px;
   padding: 12px;
   font-size: 1rem;
-  color: var(--ui-text-main);
+  color: var(--text-main);
   margin-bottom: 8px;
 }
 
@@ -142,23 +142,23 @@
   font-size: 1rem;
   font-weight: bold;
   border: none;
-  background-color: var(--ui-btn-bg);
-  color: var(--ui-text-light);
-  border-radius: var(--ui-border-radius);
+  background-color: var(--btn-active);
+  color: var(--text-light);
+  border-radius: var(--border-radius-sm);
   cursor: pointer;
   transition: background 0.2s ease-in-out;
 }
 .multi-step-form__button:disabled {
-  background: var(--ui-btn-disabled);
+  background: var(--btn-disabled);
   cursor: not-allowed;
 }
 .multi-step-form__button--primary {
-  background: var(--ui-btn-primary);
+  background: var(--btn-active);
 }
 .multi-step-form__button--primary:hover,
 .multi-step-form__button:hover {
-  background-color: var(--ui-btn-bg-hover);
-  color: var(--ui-text-light);
+  background-color: var(--btn-hover);
+  color: var(--text-light);
 }
 
 /* Color swatches for hints */
@@ -172,11 +172,11 @@
   vertical-align: middle;
 }
 .multi-step-form__color--progress {
-  background: var(--ui-btn-primary);
+  background: var(--btn-active);
 }
 .multi-step-form__color--step-bg {
-  background: var(--ui-bg-card);
+  background: var(--bg-card);
 }
 .multi-step-form__color--error {
-  background: var(--ui-error);
+  background: var(--error);
 }

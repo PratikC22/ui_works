@@ -1,23 +1,25 @@
 :root {
-  --ui-bg-main: #fafafa;
-  --ui-bg-card: #fff;
-  --ui-bg-sidebar: #f5f5f5;
-  --ui-text-main: #333;
-  --ui-text-light: #fff;
-  --ui-text-muted: #666;
-  --ui-border: #ddd;
-  --ui-border-strong: #111;
-  --ui-border-radius: 4px;
-  --ui-border-radius-card: 8px;
-  --ui-shadow-card: 0 2px 6px rgba(0, 0, 0, 0.06);
-  --ui-shadow-modal: 0 4px 16px rgba(0, 0, 0, 0.08);
-  --ui-sidebar-shadow: 2px 0 6px rgba(0, 0, 0, 0.32);
-  --ui-btn-bg: #111;
-  --ui-btn-bg-hover: #333;
-  --ui-btn-primary: #4f46e5;
-  --ui-btn-disabled: #888;
-  --ui-error: #dc2626;
-  --ui-progress-bg: #e5e7eb;
+  --bg-main: #fafafa;
+  --bg-card: #fff;
+  --bg-sidebar: #f5f5f5;
+
+  --text-main: #333;
+  --text-light: #fff;
+  --text-muted: #666;
+
+  --border-light: #ddd;
+  --border-strong: #111;
+  --border-radius-sm: 4px;
+
+  --shadow-modal: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --sidebar-shadow: 2px 0 6px rgba(0, 0, 0, 0.32);
+
+  --btn-active: #111;
+  --btn-hover: #333;
+  --btn-disabled: #888;
+
+  --error: #dc2626;
+  --progress-bg: #e5e7eb;
 }
 
 *,

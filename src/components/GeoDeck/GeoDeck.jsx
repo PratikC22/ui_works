@@ -99,7 +99,7 @@ const GeoDeck = () => {
             <h2>Rules</h2>
             <ul>
               <li>Browse through country cards</li>
-              <li>4x4 grid layout (16 per page)</li>
+              <li>4x3 grid layout (12 per page)</li>
               <li>Fixed card sizing prevents shift</li>
               <li>Use pagination to navigate</li>
               <li>Circular navigation wraps</li>

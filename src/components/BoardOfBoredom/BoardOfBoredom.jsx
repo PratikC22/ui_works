@@ -39,18 +39,36 @@ const BoardOfBoredom = () => {
         <div className='board__panel board__panel--rules'>
           <h2 className='board__panel-title'>Rules</h2>
           <ul className='board__panel-list'>
-            <li className='board__panel-item'>Zigzag tile numbering</li>
             <li className='board__panel-item'>
-              Alternating tile colors by row
+              Use semantic HTML for the board and tiles
             </li>
-            <li className='board__panel-item'>Rolls: random 1 - 6</li>
-            <li className='board__panel-item'>Land on 100 to win</li>
-            <li className='board__panel-item'>Overshoot? No move</li>
+            <li className='board__panel-item'>
+              Ensure keyboard accessibility for all interactive elements
+            </li>
+            <li className='board__panel-item'>
+              Use ARIA attributes where appropriate for accessibility
+            </li>
+            <li className='board__panel-item'>
+              Component must be responsive and work on all screen sizes
+            </li>
+            <li className='board__panel-item'>
+              Do not use inline styles for layout or colors; use CSS classes
+            </li>
+            <li className='board__panel-item'>
+              Game logic: zigzag numbering, dice rolls (1-6), win on 100, no
+              move if overshoot
+            </li>
           </ul>
         </div>
         <div className='board__panel board__panel--hints'>
           <h2 className='board__panel-title'>Hints</h2>
           <ul className='board__panel-list'>
+            <li className='board__panel-item'>
+              <em>
+                Hints are for visual mimicry only. You can use any
+                implementation as long as the UI matches.
+              </em>
+            </li>
             <li className='board__panel-item'>
               <strong>Zigzag Numbering Logic:</strong> Even-indexed rows (from
               top) go right-to-left, odd-indexed rows go left-to-right. Use{' '}

@@ -65,6 +65,14 @@ const Home = () => {
           <h3>Image Carousel</h3>
           <p>Create an interactive image carousel with sliding transitions</p>
         </Link>
+        <Link className='challenge-card' to='/modal'>
+          <div className='card-icon'>🗔</div>
+          <h3>Modal Dialog</h3>
+          <p>
+            Accessible modal dialog with focus trap, keyboard navigation, and
+            ARIA roles.
+          </p>
+        </Link>
       </div>
     </div>
   )

@@ -43,6 +43,10 @@
     "title": "Image Carousel – UI Works",
     "description": "Interactive carousel with auto-play, keyboard navigation, and thumbnails."
   },
+  "/modal": {
+    "title": "Modal Dialog – UI Works",
+    "description": "Accessible modal dialog with focus trap, keyboard navigation, and ARIA roles."
+  },
   "/guess-my-age": {
     "title": "Guess My Age – UI Works",
     "description": "Predict age from a name using an external API."

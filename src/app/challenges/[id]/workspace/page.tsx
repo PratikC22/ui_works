@@ -277,6 +277,11 @@ export default function Workspace() {
 
     // Reset status after 2 seconds
     setTimeout(() => setSaveStatus('idle'), 2000)
+
+    // Trigger preview when auto-preview is off
+    if (!autoPreview) {
+      setPreviewKey((prev) => prev + 1)
+    }
   }
 
   const handleClearAll = () => {
@@ -451,18 +456,19 @@ export default function Workspace() {
         event.preventDefault() // Prevent browser save dialog
         handleSave() // Call existing save function
       }
+
+      if (event.key === 'Enter' && (event.ctrlKey || event.metaKey)) {
+        event.preventDefault()
+        handleRun()
+      }
     }
 
     document.addEventListener('keydown', handleKeyPress)
     return () => document.removeEventListener('keydown', handleKeyPress)
   }, [])
 
-  // Auto preview logic
-  useEffect(() => {
-    if (autoPreview && isLoaded) {
-      setPreviewKey((prev) => prev + 1)
-    }
-  }, [html, css, js, autoPreview, isLoaded])
+  // Auto preview logic - now handled in PreviewFrame component
+  // Removed to prevent double compilation
 
   // Show loading state until code is loaded
   if (!isLoaded) {
@@ -677,7 +683,14 @@ export default function Workspace() {
                 <h2 className='text-sm font-medium'>Preview</h2>
               </div>
               <div className='flex-1'>
-                <PreviewFrame key={previewKey} html={html} css={css} js={js} />
+                <PreviewFrame
+                  key={previewKey}
+                  html={html}
+                  css={css}
+                  js={js}
+                  autoPreview={autoPreview}
+                  previewKey={previewKey}
+                />
               </div>
             </div>
           </ResizablePanel>

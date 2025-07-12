@@ -4,10 +4,14 @@ const PreviewFrame = ({
   html,
   css,
   js,
+  autoPreview = false,
+  previewKey = 0,
 }: {
   html: string
   css: string
   js: string
+  autoPreview?: boolean
+  previewKey?: number
 }) => {
   const [previewHtml, setPreviewHtml] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -48,11 +52,25 @@ const PreviewFrame = ({
   }
 
   useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      if (html || css || js) compileCode()
-    }, 500)
-    return () => clearTimeout(timeoutId)
-  }, [html, css, js])
+    // Only auto-compile if autoPreview is enabled
+    if (autoPreview) {
+      const timeoutId = setTimeout(() => {
+        if (html || css || js) compileCode()
+      }, 500)
+      return () => clearTimeout(timeoutId)
+    }
+  }, [html, css, js, autoPreview])
+
+  // Manual compilation trigger (when previewKey changes)
+  useEffect(() => {
+    if (!autoPreview && (html || css || js)) {
+      console.log(
+        'Manual compilation triggered by previewKey change:',
+        previewKey
+      )
+      compileCode()
+    }
+  }, [previewKey]) // Only depend on previewKey, not on html/css/js changes
 
   return (
     <div className='w-full h-full flex flex-col'>

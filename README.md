@@ -111,7 +111,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👨‍💻 Creator
 
-**Pratik Avinash Chaudhari** - Senior Software Engineer at Nference Labs
+**Pratik Avinash Chaudhari**
 
 - GitHub: [@PratikC22](https://github.com/PratikC22)
 - LinkedIn: [Pratik Chaudhari](https://linkedin.com/in/PratikC22)

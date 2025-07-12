@@ -37,7 +37,7 @@ export function ConsoleCredit() {
           %c  github   - Open GitHub repo
           %c
           %cBuilt by Pratik Avinash Chaudhari
-          %cSenior Software Engineer @ Nference Labs
+          %cSoftware Engineer
         `,
           'color: #3b82f6; font-size: 14px; font-weight: bold;',
           '',
@@ -58,7 +58,7 @@ export function ConsoleCredit() {
           %c👨‍💻 About the Creator
           %c
           %cPratik Avinash Chaudhari
-          %cSenior Software Engineer @ Nference Labs
+          %cSoftware Engineer
           %c
           %cPassionate about improving developer experience
           %cand building tools that make a difference.

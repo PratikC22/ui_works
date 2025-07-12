@@ -22,8 +22,8 @@ export default function AboutPage() {
         <div className='text-center mb-12'>
           <h1 className='text-4xl font-bold mb-4'>About UI Works</h1>
           <p className='text-xl text-muted-foreground max-w-2xl mx-auto'>
-            Revolutionizing frontend technical interviews with interactive
-            coding challenges
+            A better way to test frontend skills — fast, realistic, and
+            distraction-free.
           </p>
         </div>
 
@@ -32,14 +32,15 @@ export default function AboutPage() {
             <CardHeader>
               <CardTitle className='flex items-center gap-2'>
                 <Target className='h-5 w-5' />
-                Mission
+                Why it exists
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p className='text-muted-foreground'>
-                To provide a modern, interactive platform for evaluating
-                frontend development skills through real-world coding challenges
-                that mirror actual development scenarios.
+                UI Works exists because technical interviews suck — especially
+                for frontend roles. This app brings real-world challenges, with
+                real tools, in a real environment. No MCQs. No trick puzzles.
+                Just code.
               </p>
             </CardContent>
           </Card>
@@ -48,14 +49,14 @@ export default function AboutPage() {
             <CardHeader>
               <CardTitle className='flex items-center gap-2'>
                 <Users className='h-5 w-5' />
-                Community
+                Built for devs
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p className='text-muted-foreground'>
-                Built for developers, by developers. Open source and
-                community-driven to ensure the best possible experience for both
-                interviewers and candidates.
+                The platform is open source, and it's growing. If you're tired
+                of over-engineered platforms and bloated UX, contribute or fork
+                it. Whether you're hiring or learning — this is for you.
               </p>
             </CardContent>
           </Card>
@@ -78,20 +79,15 @@ export default function AboutPage() {
                   Pratik Avinash Chaudhari
                 </h3>
                 <p className='text-muted-foreground mb-4'>
-                  Senior Software Engineer at Nference Labs
-                </p>
-                <p className='text-muted-foreground mb-4'>
-                  Passionate about improving the developer experience and
-                  building tools that make a real difference in how we conduct
-                  technical interviews. UI Works was born from the frustration
-                  of existing interview platforms that don&apos;t properly
-                  assess frontend skills.
+                  UI Works was created to bring clarity and realism to frontend
+                  interviews. It focuses on what matters: code, design thinking,
+                  and the actual workflows developers use every day.
                 </p>
                 <div className='flex flex-wrap gap-2 mb-4'>
-                  <Badge variant='secondary'>Full-Stack Development</Badge>
+                  <Badge variant='secondary'>Full-Stack</Badge>
                   <Badge variant='secondary'>React/Next.js</Badge>
                   <Badge variant='secondary'>TypeScript</Badge>
-                  <Badge variant='secondary'>UI/UX Design</Badge>
+                  <Badge variant='secondary'>UI/UX</Badge>
                 </div>
               </div>
 
@@ -137,21 +133,21 @@ export default function AboutPage() {
           <CardContent>
             <div className='grid md:grid-cols-2 gap-4'>
               <div>
-                <h4 className='font-semibold mb-2'>For Interviewers</h4>
+                <h4 className='font-semibold mb-2'>Interviewers</h4>
                 <ul className='text-sm text-muted-foreground space-y-1'>
-                  <li>• Standardized assessment criteria</li>
-                  <li>• Real-time code evaluation</li>
-                  <li>• Professional interview environment</li>
-                  <li>• Comprehensive challenge library</li>
+                  <li>• Instant previews & evaluation</li>
+                  <li>• Practical coding tasks</li>
+                  <li>• Clean, distraction-free UI</li>
+                  <li>• Sharable challenge links</li>
                 </ul>
               </div>
               <div>
-                <h4 className='font-semibold mb-2'>For Candidates</h4>
+                <h4 className='font-semibold mb-2'>Candidates</h4>
                 <ul className='text-sm text-muted-foreground space-y-1'>
-                  <li>• Fair and transparent evaluation</li>
-                  <li>• Real-world coding scenarios</li>
-                  <li>• Educational content and hints</li>
-                  <li>• Portfolio-worthy solutions</li>
+                  <li>• Real-time feedback</li>
+                  <li>• Mobile-ready (mostly)</li>
+                  <li>• Open source & free</li>
+                  <li>• Learn by doing</li>
                 </ul>
               </div>
             </div>

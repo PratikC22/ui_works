@@ -16,6 +16,7 @@ const PreviewFrame = ({
   const [previewHtml, setPreviewHtml] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const iframeRef = useRef<HTMLIFrameElement>(null)
+  const debounceTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   const compileCode = async () => {
     setIsLoading(true)
@@ -51,13 +52,24 @@ const PreviewFrame = ({
     }
   }
 
+  // Debounced auto-compilation
   useEffect(() => {
-    // Only auto-compile if autoPreview is enabled
     if (autoPreview) {
-      const timeoutId = setTimeout(() => {
-        if (html || css || js) compileCode()
-      }, 500)
-      return () => clearTimeout(timeoutId)
+      if (debounceTimeoutRef.current) {
+        clearTimeout(debounceTimeoutRef.current)
+      }
+
+      debounceTimeoutRef.current = setTimeout(() => {
+        if (html || css || js) {
+          compileCode()
+        }
+      }, 1200)
+
+      return () => {
+        if (debounceTimeoutRef.current) {
+          clearTimeout(debounceTimeoutRef.current)
+        }
+      }
     }
   }, [html, css, js, autoPreview])
 

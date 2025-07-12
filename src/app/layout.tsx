@@ -7,6 +7,7 @@ import { Footer } from '@/components/layout/footer'
 import { DynamicBreadcrumb } from '@/components/layout/breadcrumb'
 import { ConsoleCredit } from '@/components/layout/console-credit'
 import { ScrollToTop } from '@/components/layout/scroll-to-top'
+import { AnnouncementBanner } from '@/components/layout/announcement-banner'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -39,6 +40,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <AnnouncementBanner />
           <ScrollToTop />
           <Header />
           <DynamicBreadcrumb />

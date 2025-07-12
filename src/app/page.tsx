@@ -71,6 +71,7 @@ export default function HomePage() {
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                className='flex items-center justify-center'
               >
                 <Button
                   size='lg'

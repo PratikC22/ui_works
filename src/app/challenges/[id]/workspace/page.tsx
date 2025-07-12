@@ -43,7 +43,6 @@ const saveToStorage = (
   try {
     const key = getStorageKey(challengeId)
     localStorage.setItem(key, JSON.stringify(code))
-    console.log(`Code saved to localStorage for challenge ${challengeId}`)
     return true
   } catch (error) {
     console.error('Save failed:', error)
@@ -57,7 +56,6 @@ const loadFromStorage = (challengeId: string) => {
     const saved = localStorage.getItem(key)
     if (saved) {
       const parsed = JSON.parse(saved)
-      console.log(`Code loaded from localStorage for challenge ${challengeId}`)
       return parsed
     }
   } catch (error) {

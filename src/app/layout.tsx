@@ -6,6 +6,7 @@ import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 import { DynamicBreadcrumb } from '@/components/layout/breadcrumb'
 import { ConsoleCredit } from '@/components/layout/console-credit'
+import { ScrollToTop } from '@/components/layout/scroll-to-top'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -38,6 +39,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <ScrollToTop />
           <Header />
           <DynamicBreadcrumb />
           <main className='flex-1'>{children}</main>

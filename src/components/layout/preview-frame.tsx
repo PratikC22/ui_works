@@ -14,12 +14,10 @@ const PreviewFrame = ({
   previewKey?: number
 }) => {
   const [previewHtml, setPreviewHtml] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
   const iframeRef = useRef<HTMLIFrameElement>(null)
   const debounceTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   const compileCode = async () => {
-    setIsLoading(true)
     try {
       const response = await fetch('/api/compile', {
         method: 'POST',
@@ -47,8 +45,6 @@ const PreviewFrame = ({
         </body>
         </html>
       `)
-    } finally {
-      setIsLoading(false)
     }
   }
 
@@ -71,6 +67,7 @@ const PreviewFrame = ({
         }
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [html, css, js, autoPreview])
 
   // Manual compilation trigger (when previewKey changes)
@@ -82,23 +79,18 @@ const PreviewFrame = ({
       )
       compileCode()
     }
-  }, [previewKey]) // Only depend on previewKey, not on html/css/js changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [previewKey])
 
   return (
     <div className='w-full h-full flex flex-col'>
-      {isLoading ? (
-        <div className='w-full h-full flex items-center justify-center'>
-          Loading...
-        </div>
-      ) : (
-        <iframe
-          ref={iframeRef}
-          srcDoc={previewHtml}
-          title='Code Preview'
-          sandbox='allow-scripts allow-same-origin'
-          className='w-full flex-1 border-none bg-white dark:bg-gray-900'
-        />
-      )}
+      <iframe
+        ref={iframeRef}
+        srcDoc={previewHtml}
+        title='Code Preview'
+        sandbox='allow-scripts allow-same-origin'
+        className='w-full flex-1 border-none bg-white dark:bg-gray-900'
+      />
     </div>
   )
 }

@@ -54,9 +54,10 @@ export default function AboutPage() {
             </CardHeader>
             <CardContent>
               <p className='text-muted-foreground'>
-                The platform is open source, and it's growing. If you're tired
-                of over-engineered platforms and bloated UX, contribute or fork
-                it. Whether you're hiring or learning — this is for you.
+                The platform is open source, and it&apos;s growing. If
+                you&apos;re tired of over-engineered platforms and bloated UX,
+                contribute or fork it. Whether you&apos;re hiring or learning —
+                this is for you.
               </p>
             </CardContent>
           </Card>

@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Code, Zap, Target, Users, ArrowRight, Sparkles } from 'lucide-react'
+import { Code, Target, Users, ArrowRight, Sparkles } from 'lucide-react'
 import Link from 'next/link'
 import { SAMPLE_CHALLENGES } from '@/lib/data'
 import { motion } from 'framer-motion'

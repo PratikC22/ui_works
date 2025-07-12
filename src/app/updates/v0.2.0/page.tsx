@@ -1,6 +1,7 @@
 'use client'
 
 import { Separator } from '@/components/ui/separator'
+import Link from 'next/link'
 
 export default function UpdatePage() {
   return (
@@ -51,9 +52,9 @@ export default function UpdatePage() {
           </h2>
           <p className='text-lg'>
             The new{' '}
-            <a href='/challenges' className='text-primary hover:underline'>
+            <Link href='/challenges' className='text-primary hover:underline'>
               /challenges
-            </a>{' '}
+            </Link>{' '}
             dashboard serves as your hub for coding tasks. Discover challenges
             with difficulty badges, tech stack tags, and a streamlined layout.
           </p>

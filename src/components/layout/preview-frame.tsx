@@ -89,7 +89,7 @@ const PreviewFrame = ({
         srcDoc={previewHtml}
         title='Code Preview'
         sandbox='allow-scripts allow-same-origin'
-        className='w-full flex-1 border-none bg-white dark:bg-gray-900'
+        className='w-full flex-1 border-none bg-white'
       />
     </div>
   )

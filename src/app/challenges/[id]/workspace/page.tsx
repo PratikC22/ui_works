@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useParams } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import JSZip from 'jszip'
+import { useAutoPreview } from '@/hooks/useAutoPreview'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import {
   ResizableHandle,
@@ -22,6 +23,8 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
 import { Play, RotateCcw, Save, Download, Code, BookOpen } from 'lucide-react'
+import { Switch } from '@/components/ui/switch'
+import { Label } from '@/components/ui/label'
 import {
   Sheet,
   SheetContent,
@@ -69,7 +72,6 @@ const clearFromStorage = (challengeId: string) => {
   try {
     const key = getStorageKey(challengeId)
     localStorage.removeItem(key)
-    console.log(`Code cleared from localStorage for challenge ${challengeId}`)
     return true
   } catch (error) {
     console.error('Clear failed:', error)
@@ -97,7 +99,6 @@ const cleanupOldWorkspaces = () => {
       // Sort by last modified time (if available) or just remove oldest
       const keysToRemove = workspaceKeys.slice(0, workspaceKeys.length - 10)
       keysToRemove.forEach((key) => localStorage.removeItem(key))
-      console.log(`Cleaned up ${keysToRemove.length} old workspace entries`)
     }
   } catch (error) {
     console.error('Cleanup failed:', error)
@@ -109,7 +110,6 @@ const clearAllWorkspaces = () => {
   try {
     const workspaceKeys = getAllWorkspaceKeys()
     workspaceKeys.forEach((key) => localStorage.removeItem(key))
-    console.log(`Cleared all ${workspaceKeys.length} workspace entries`)
     return workspaceKeys.length
   } catch (error) {
     console.error('Clear all failed:', error)
@@ -179,12 +179,12 @@ export default function Workspace() {
   const [css, setCss] = useState('')
   const [js, setJs] = useState('')
   const [activeTab, setActiveTab] = useState('html')
-  const [showPreview, setShowPreview] = useState(false)
   const [previewKey, setPreviewKey] = useState(0)
   const [isLoaded, setIsLoaded] = useState(false)
   const [saveStatus, setSaveStatus] = useState<
     'idle' | 'saving' | 'saved' | 'error'
   >('idle')
+  const { autoPreview, setAutoPreview } = useAutoPreview()
 
   const initialCode = {
     html: '<h1>Hello World!</h1>\n<p>Start coding here...</p>',
@@ -254,22 +254,16 @@ export default function Workspace() {
     setHtml(formatCode(html, 'html'))
     setCss(formatCode(css, 'css'))
     setJs(formatCode(js, 'javascript'))
-    console.log('Code formatted successfully')
   }
 
   const handleRun = () => {
-    console.log('Run button clicked')
-    console.log('Current code:', { html, css, js })
-    setShowPreview(true)
     setPreviewKey((prev) => prev + 1)
-    console.log('Preview should now be visible')
   }
 
   const handleReset = () => {
     setHtml(initialCode.html)
     setCss(initialCode.css)
     setJs(initialCode.js)
-    setShowPreview(false)
     setPreviewKey(0)
     // Clear localStorage
     clearFromStorage(challengeId)
@@ -286,9 +280,8 @@ export default function Workspace() {
   }
 
   const handleClearAll = () => {
-    const count = clearAllWorkspaces()
+    clearAllWorkspaces()
     handleReset()
-    console.log(`Cleared ${count} workspace entries`)
   }
 
   const handleDownload = async () => {
@@ -330,8 +323,6 @@ export default function Workspace() {
       link.click()
       document.body.removeChild(link)
       URL.revokeObjectURL(url)
-
-      console.log('Files downloaded successfully')
     } catch (error) {
       console.error('Download failed:', error)
       // Fallback: download files individually
@@ -452,6 +443,27 @@ export default function Workspace() {
     cleanupOldWorkspaces()
   }, [])
 
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      // Ctrl + S (Windows/Linux) OR Cmd + S (Mac)
+      if (event.key === 's' && (event.ctrlKey || event.metaKey)) {
+        event.preventDefault() // Prevent browser save dialog
+        handleSave() // Call existing save function
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyPress)
+    return () => document.removeEventListener('keydown', handleKeyPress)
+  }, [])
+
+  // Auto preview logic
+  useEffect(() => {
+    if (autoPreview && isLoaded) {
+      setPreviewKey((prev) => prev + 1)
+    }
+  }, [html, css, js, autoPreview, isLoaded])
+
   // Show loading state until code is loaded
   if (!isLoaded) {
     return (
@@ -542,6 +554,14 @@ export default function Workspace() {
             </div>
           </div>
           <div className='flex items-center gap-2'>
+            <div className='flex items-center gap-2'>
+              <Switch
+                id='auto-preview'
+                checked={autoPreview}
+                onCheckedChange={setAutoPreview}
+              />
+              <Label htmlFor='auto-preview'>Auto Preview</Label>
+            </div>
             <Button
               variant='outline'
               size='sm'
@@ -657,21 +677,7 @@ export default function Workspace() {
                 <h2 className='text-sm font-medium'>Preview</h2>
               </div>
               <div className='flex-1'>
-                {showPreview ? (
-                  <PreviewFrame
-                    key={previewKey}
-                    html={html}
-                    css={css}
-                    js={js}
-                  />
-                ) : (
-                  <div className='flex items-center justify-center h-full text-muted-foreground'>
-                    <div className='text-center'>
-                      <Play className='h-12 w-12 mx-auto mb-4 opacity-50' />
-                      <p>Click &quot;Run&quot; to see your code preview</p>
-                    </div>
-                  </div>
-                )}
+                <PreviewFrame key={previewKey} html={html} css={css} js={js} />
               </div>
             </div>
           </ResizablePanel>

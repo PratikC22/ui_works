@@ -181,10 +181,45 @@ const PreviewFrame = ({
 }) => {
   const [previewHtml, setPreviewHtml] = useState('')
   const [error, setError] = useState<string | null>(null)
+  const [unusedGifs, setUnusedGifs] = useState([
+    '/errors/error1.gif',
+    '/errors/error2.gif',
+    '/errors/error3.gif',
+    '/errors/error4.gif',
+    '/errors/error5.gif',
+    '/errors/error6.gif',
+    '/errors/error7.gif',
+    '/errors/error8.jpeg',
+  ])
   const iframeRef = useRef<HTMLIFrameElement>(null)
+
+  const getRandomGif = () => {
+    if (unusedGifs.length === 0) {
+      // Reset when all have been used
+      const allGifs = [
+        '/errors/error1.gif',
+        '/errors/error2.gif',
+        '/errors/error3.gif',
+        '/errors/error4.gif',
+        '/errors/error5.gif',
+        '/errors/error6.gif',
+        '/errors/error7.gif',
+        '/errors/error8.jpeg',
+      ]
+      setUnusedGifs(allGifs.slice(1)) // Remove the one we're about to use
+      return allGifs[0]
+    }
+
+    const randomIndex = Math.floor(Math.random() * unusedGifs.length)
+    const selectedGif = unusedGifs[randomIndex]
+    setUnusedGifs((prev) => prev.filter((_, index) => index !== randomIndex))
+    return selectedGif
+  }
 
   useEffect(() => {
     try {
+      const selectedGif = getRandomGif()
+
       const fullHtml = `
         <!DOCTYPE html>
         <html lang="en">
@@ -209,28 +244,16 @@ const PreviewFrame = ({
           <body>
             ${html}
             <script>
-             (function() {
-               const errorGifs = [
-                 '/errors/error1.gif',
-                 '/errors/error2.gif',
-                 '/errors/error3.gif',
-                 '/errors/error4.gif',
-                 '/errors/error5.gif',
-                 '/errors/error6.gif',
-                 '/errors/error7.gif',
-                 '/errors/error8.jpeg',
-               ];
-               
-               try {
-                 ${js}
-               } catch (e) {
-                 console.error('Preview JavaScript Error:', e);
-                 const randomGif = errorGifs[Math.floor(Math.random() * errorGifs.length)];
-                 document.body.innerHTML += '<div style="text-align: center; margin: 10px 0;"><img src="' + randomGif + '" alt="Error GIF" style="width: 200px; height: auto; border-radius: 4px;"></div>';
-                 document.body.innerHTML += '<div style="color: red; background: #fee; padding: 10px; margin: 10px 0; border-radius: 4px; font-family: monospace; border: 1px solid #fcc;"><strong>JavaScript Error:</strong> ' + e.message + '</div>';
-               }
-             })();
-           </script>
+              (function() {
+                try {
+                  ${js}
+                } catch (e) {
+                  console.error('Preview JavaScript Error:', e);
+                  document.body.innerHTML += '<div style="text-align: center; margin: 10px 0; width: 100%; height: 150px; display: flex; align-items: center; justify-content: center;"><img src="${selectedGif}" alt="Error GIF" style="max-width: 200px; max-height: 150px; width: auto; height: auto; border-radius: 4px;"></div>';
+                  document.body.innerHTML += '<div style="color: red; background: #fee; padding: 10px; margin: 10px 0; border-radius: 4px; font-family: monospace; border: 1px solid #fcc;"><strong>JavaScript Error:</strong> ' + e.message + '</div>';
+                }
+              })();
+            </script>
           </body>
         </html>
       `

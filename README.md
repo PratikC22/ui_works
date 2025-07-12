@@ -40,10 +40,10 @@ A modern, interactive platform for conducting frontend technical interviews with
 
 ```bash
 # Clone the repository
-git clone https://github.com/pratikc22/ui-works.git
+git clone https://github.com/pratikc22/ui_works.git
 
 # Navigate to the project
-cd ui-works
+cd ui_works
 
 # Install dependencies
 npm install

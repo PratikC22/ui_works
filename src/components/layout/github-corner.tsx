@@ -3,7 +3,7 @@
 export function GitHubCorner() {
   return (
     <a
-      href='https://github.com/pratikc22/ui-works'
+      href='https://github.com/pratikc22/ui_works'
       className='fixed top-0 right-0 z-50 transition-transform hover:scale-110'
       target='_blank'
       rel='noopener noreferrer'

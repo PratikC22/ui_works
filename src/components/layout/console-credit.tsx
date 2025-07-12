@@ -80,7 +80,7 @@ export function ConsoleCredit() {
         return
       }
       if (args[0] === 'github') {
-        window.open('https://github.com/pratikc22/ui-works', '_blank')
+        window.open('https://github.com/pratikc22/ui_works', '_blank')
         console.log(
           '%c🔗 Opening GitHub repository...',
           'color: #10b981; font-size: 12px;'

@@ -44,7 +44,7 @@ export function Header() {
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <a
-                  href='https://github.com/pratikc22/ui-works'
+                  href='https://github.com/pratikc22/ui_works'
                   target='_blank'
                   rel='noopener noreferrer'
                 >

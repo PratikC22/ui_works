@@ -7,13 +7,13 @@ export function useAutoPreview() {
 
   // Load from localStorage on mount
   useEffect(() => {
-     try {
-      const saved = localStorage.getItem('autoPreview');
-      const parsed = JSON.parse(saved ?? 'false');
-      setAutoPreview(typeof parsed === 'boolean' ? parsed : false);
+    try {
+      const saved = localStorage.getItem(AUTO_PREVIEW_KEY)
+      const parsed = JSON.parse(saved ?? 'false')
+      setAutoPreview(typeof parsed === 'boolean' ? parsed : false)
     } catch (e) {
-      console.warn('Failed to load autoPreview from localStorage:', e);
-      setAutoPreview(false);
+      console.warn('Failed to load autoPreview from localStorage:', e)
+      setAutoPreview(false)
     }
   }, [])
 

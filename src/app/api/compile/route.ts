@@ -1,178 +1,126 @@
 import { NextRequest, NextResponse } from 'next/server'
-import fs from 'fs/promises'
-import path from 'path'
-import { randomUUID } from 'crypto'
-import { exec } from 'child_process'
-import { promisify } from 'util'
-
-const execAsync = promisify(exec)
 
 export async function POST(request: NextRequest) {
-  const { html, css, js, buildTool = 'none' } = await request.json()
-
   try {
-    const tempId = randomUUID()
-    const tempDir = path.join(process.cwd(), 'temp', tempId)
-    await fs.mkdir(tempDir, { recursive: true })
+    const { html, css, js } = await request.json()
 
-    // Create package.json if build tool is specified
-    if (buildTool !== 'none') {
-      const packageJson = {
-        name: `temp-project-${tempId}`,
-        version: '1.0.0',
-        scripts: {
-          build: getBuildScript(buildTool),
-          dev: getDevScript(buildTool),
-        },
-        dependencies: getDependencies(buildTool),
-        devDependencies: getDevDependencies(buildTool),
-      }
+    const gifs = [
+      '/errors/error1.gif',
+      '/errors/error2.gif',
+      '/errors/error3.gif',
+      '/errors/error4.gif',
+      '/errors/error5.gif',
+      '/errors/error6.gif',
+      '/errors/error7.gif',
+      '/errors/error8.jpeg',
+    ]
+    const randomGif = gifs[Math.floor(Math.random() * gifs.length)]
 
-      await fs.writeFile(
-        path.join(tempDir, 'package.json'),
-        JSON.stringify(packageJson, null, 2)
-      )
-    }
+    const fullHtml = `
+            <!DOCTYPE html>
+            <html lang="en">
+              <head>
+                <meta charset="UTF-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <title>Code Preview</title>
+                <style>
+                  ${css}
 
-    // Write source files
-    if (html) {
-      await fs.writeFile(path.join(tempDir, 'index.html'), html)
-    }
-    if (css) {
-      await fs.writeFile(path.join(tempDir, 'styles.css'), css)
-    }
-    if (js) {
-      await fs.writeFile(path.join(tempDir, 'script.js'), js)
-    }
+                  .js-error {
+                    background: #fee;
+                    border: 1px solid #fcc;
+                    color: #c33;
+                    padding: 10px;
+                    margin: 10px 0;
+                    border-radius: 4px;
+                    font-family: monospace;
+                    white-space: pre-wrap;
+                    word-break: break-word;
+                  }
 
-    let result = ''
+                  .js-error::before {
+                    content: "JavaScript Error: ";
+                    font-weight: bold;
+                  }
 
-    if (buildTool === 'none') {
-      // Simple concatenation like your original approach
-      result = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code Preview</title>
-    <style>
-        * { box-sizing: border-box; }
-        body { 
-            margin: 0; 
-            padding: 16px; 
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: white;
-            color: #333;
-        }
-        ${css || ''}
-    </style>
-</head>
-<body>
-    ${html || ''}
-    <script>
-        (function() {
-            try {
-                ${js || ''}
-            } catch (e) {
-                console.error('JavaScript Error:', e);
-                document.body.innerHTML += '<div style="color: red; background: #fee; padding: 10px; margin: 10px 0; border-radius: 4px; font-family: monospace; border: 1px solid #fcc;"><strong>JavaScript Error:</strong> ' + e.message + '</div>';
-            }
-        })();
-    </script>
-</body>
-</html>`
-    } else {
-      // Run build process
-      await execAsync('npm install', { cwd: tempDir, timeout: 30000 })
-      await execAsync('npm run build', { cwd: tempDir, timeout: 30000 })
+                  .error-gif {
+                    max-width: 200px;
+                    max-height: 150px;
+                    border-radius: 8px;
+                    margin-top: 20px;
+                    display: block;
+                    margin-inline: auto;
+                  }
+                </style>
+              </head>
+              <body>
+                ${html}
 
-      // Read the built file
-      const builtPath = path.join(tempDir, 'dist', 'index.html')
-      result = await fs.readFile(builtPath, 'utf-8')
-    }
+                <div id="error-container"></div>
 
-    // Clean up
-    await fs.rm(tempDir, { recursive: true, force: true })
+                <script>
+                  (function () {
+                    const errorContainer = document.getElementById('error-container')
 
-    return NextResponse.json({
-      success: true,
-      html: result,
-      id: tempId,
-    })
+                    const originalError = console.error
+                    console.error = function (...args) {
+                      originalError.apply(console, args)
+                      const errorDiv = document.createElement('div')
+                      errorDiv.className = 'js-error'
+                      errorDiv.textContent = args.join(' ')
+                      errorContainer.appendChild(errorDiv)
+                    }
+
+                    window.addEventListener('error', function (event) {
+                      const errorDiv = document.createElement('div')
+                      errorDiv.className = 'js-error'
+                      errorDiv.textContent = \`\${event.error?.message || event.message} at \${event.filename}:\${event.lineno}:\${event.colno}\`
+                      errorContainer.appendChild(errorDiv)
+
+                      const img = document.createElement('img')
+                      img.src = '${randomGif}'
+                      img.className = 'error-gif'
+                      errorContainer.appendChild(img)
+                    })
+
+                    window.addEventListener('unhandledrejection', function (event) {
+                      const errorDiv = document.createElement('div')
+                      errorDiv.className = 'js-error'
+                      errorDiv.textContent = \`Unhandled Promise Rejection: \${event.reason}\`
+                      errorContainer.appendChild(errorDiv)
+
+                      const img = document.createElement('img')
+                      img.src = '${randomGif}'
+                      img.className = 'error-gif'
+                      errorContainer.appendChild(img)
+                    })
+
+                    try {
+                      ${js}
+                    } catch (error) {
+
+
+                      const img = document.createElement('img')
+                      img.src = '${randomGif}'
+                      img.className = 'error-gif'
+                      errorContainer.appendChild(img)
+
+                      console.error('JavaScript execution error:', error)
+                    }
+                  })()
+                </script>
+              </body>
+            </html>`
+
+    return NextResponse.json({ html: fullHtml })
   } catch (error) {
-    console.error('Compilation error:', error)
+    console.error('Build error:', error)
     return NextResponse.json(
       {
-        error: 'Compilation failed',
-        message: error instanceof Error ? error.message : 'Unknown error',
+        error: 'Build failed',
+        details: error instanceof Error ? error.message : 'Unknown error',
       },
       { status: 500 }
     )
-  }
-}
-
-function getBuildScript(buildTool: string): string {
-  switch (buildTool) {
-    case 'vite':
-      return 'vite build'
-    case 'webpack':
-      return 'webpack --mode production'
-    case 'parcel':
-      return 'parcel build index.html'
-    default:
-      return 'echo "No build script"'
-  }
-}
-
-function getDevScript(buildTool: string): string {
-  switch (buildTool) {
-    case 'vite':
-      return 'vite'
-    case 'webpack':
-      return 'webpack serve'
-    case 'parcel':
-      return 'parcel index.html'
-    default:
-      return 'echo "No dev script"'
-  }
-}
-
-function getDependencies(buildTool: string): Record<string, string> {
-  const base = {}
-
-  switch (buildTool) {
-    case 'vite':
-      return { ...base }
-    case 'webpack':
-      return { ...base }
-    case 'parcel':
-      return { ...base }
-    default:
-      return base
-  }
-}
-
-function getDevDependencies(buildTool: string): Record<string, string> {
-  switch (buildTool) {
-    case 'vite':
-      return {
-        vite: '^4.0.0',
-        '@vitejs/plugin-react': '^4.0.0',
-      }
-    case 'webpack':
-      return {
-        webpack: '^5.0.0',
-        'webpack-cli': '^5.0.0',
-        'html-webpack-plugin': '^5.0.0',
-        'css-loader': '^6.0.0',
-        'style-loader': '^3.0.0',
-      }
-    case 'parcel':
-      return {
-        parcel: '^2.0.0',
-      }
-    default:
-      return {}
   }
 }

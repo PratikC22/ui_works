@@ -1,3 +1,5 @@
+'use client'
+
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -8,33 +10,77 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Code, Zap, Target, Users, ArrowRight } from 'lucide-react'
+import { Code, Zap, Target, Users, ArrowRight, Sparkles } from 'lucide-react'
 import Link from 'next/link'
 import { SAMPLE_CHALLENGES } from '@/lib/data'
+import { motion } from 'framer-motion'
+import { FloatingBubbles } from '@/components/ui/floating-bubbles'
 
 export default function HomePage() {
   return (
     <div className='min-h-screen'>
       {/* Hero Section */}
-      <section className='py-20 px-4'>
-        <div className='container mx-auto text-center'>
-          <h1 className='text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent'>
+      <section className='relative py-32 px-4 overflow-hidden'>
+        {/* Animated background elements */}
+        <div className='absolute inset-0 bg-gradient-to-br from-slate-50/50 via-transparent to-slate-100/50 dark:from-slate-900/20 dark:to-slate-800/20' />
+
+        {/* Floating bubbles */}
+        <FloatingBubbles />
+
+        <div className='container mx-auto text-center relative z-10'>
+          {/* Animated badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className='inline-flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-full text-sm font-medium mb-8'
+          >
+            <Sparkles className='h-4 w-4' />
+            Interactive Coding Platform
+          </motion.div>
+
+          {/* Animated heading */}
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className='text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-slate-900 via-slate-700 to-slate-900 dark:from-slate-100 dark:via-slate-300 dark:to-slate-100 bg-clip-text text-transparent'
+          >
             Master Frontend Development
-          </h1>
-          <p className='text-xl text-muted-foreground mb-8 max-w-2xl mx-auto'>
+          </motion.h1>
+
+          {/* Animated subtitle */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className='text-xl text-slate-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto'
+          >
             Practice real-world frontend challenges, improve your skills, and
             prepare for interviews with our interactive coding platform.
-          </p>
-          <div className='flex flex-col sm:flex-row gap-4 justify-center'>
+          </motion.p>
+
+          {/* Animated button */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className='flex flex-col sm:flex-row gap-4 justify-center'
+          >
             <Link href='/challenges'>
-              <Button
-                size='lg'
-                className='flex items-center gap-2 cursor-pointer'
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                Start Coding <ArrowRight className='h-4 w-4' />
-              </Button>
+                <Button
+                  size='lg'
+                  className='flex items-center gap-2 cursor-pointer bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:hover:bg-slate-200 dark:text-slate-900 shadow-lg hover:shadow-xl transition-all duration-300'
+                >
+                  Start Coding <ArrowRight className='h-4 w-4' />
+                </Button>
+              </motion.div>
             </Link>
-          </div>
+          </motion.div>
         </div>
       </section>
 

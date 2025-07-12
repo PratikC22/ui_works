@@ -9,10 +9,27 @@ export function useAutoPreview() {
   useEffect(() => {
     try {
       const saved = localStorage.getItem(AUTO_PREVIEW_KEY)
-      const parsed = JSON.parse(saved ?? 'false')
-      setAutoPreview(typeof parsed === 'boolean' ? parsed : false)
+
+      if (saved === null || saved === undefined) {
+        setAutoPreview(false)
+        return
+      }
+
+      if (saved === '') {
+        setAutoPreview(false)
+        return
+      }
+
+      const parsed = JSON.parse(saved)
+
+      if (typeof parsed === 'boolean') {
+        setAutoPreview(parsed)
+      } else {
+        console.warn('Invalid autoPreview value in localStorage:', parsed)
+        setAutoPreview(false)
+      }
     } catch (e) {
-      console.warn('Failed to load autoPreview from localStorage:', e)
+      console.warn('Failed to parse autoPreview from localStorage:', e)
       setAutoPreview(false)
     }
   }, [])

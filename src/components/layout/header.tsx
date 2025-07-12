@@ -43,13 +43,16 @@ export function Header() {
                 <Link href='/about'>About UI Works</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <a
+                <Link href='/updates/v0.2.0'>Release Notes</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link
                   href='https://github.com/pratikc22/ui_works'
                   target='_blank'
                   rel='noopener noreferrer'
                 >
                   View on GitHub
-                </a>
+                </Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

@@ -91,7 +91,7 @@ export default function HomePage() {
           <h2 className='text-3xl font-bold text-center mb-12'>
             Why Choose UI Works?
           </h2>
-          <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-8'>
+          <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
             <Card className='text-center'>
               <CardHeader>
                 <Code className='h-12 w-12 mx-auto mb-4 text-primary' />
@@ -101,19 +101,6 @@ export default function HomePage() {
                 <p className='text-muted-foreground'>
                   Practice with challenges based on actual frontend development
                   scenarios
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className='text-center'>
-              <CardHeader>
-                <Zap className='h-12 w-12 mx-auto mb-4 text-primary' />
-                <CardTitle>Instant Feedback</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className='text-muted-foreground'>
-                  Get immediate feedback on your code with live preview and
-                  error detection
                 </p>
               </CardContent>
             </Card>

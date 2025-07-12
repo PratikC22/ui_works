@@ -18,7 +18,6 @@ interface GetStorageConfig<T> {
   key: string
   defaultValue: T
   storageType?: StorageType
-  serialize?: (value: T) => string
   deserialize?: (value: string) => T
 }
 
@@ -97,7 +96,6 @@ export const storageOperations = {
       key,
       defaultValue,
       storageType = StorageType.LOCAL,
-      serialize = defaultSerialize,
       deserialize = defaultDeserialize,
     } = config
 
@@ -198,7 +196,6 @@ export const useStorage = <T>(
         key,
         defaultValue,
         storageType,
-        serialize,
         deserialize,
       })
 
@@ -215,15 +212,7 @@ export const useStorage = <T>(
     } finally {
       setIsLoading(false)
     }
-  }, [
-    key,
-    defaultValue,
-    storageType,
-    validator,
-    handleError,
-    serialize,
-    deserialize,
-  ])
+  }, [key, defaultValue, storageType, validator, handleError, deserialize])
 
   // Storage event listener for cross-tab sync
   useEffect(() => {
